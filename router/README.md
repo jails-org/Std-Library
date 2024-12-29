@@ -1,18 +1,17 @@
 # router
 
-Grapnel, the smallest Javascript router with named parameters.
-
-- Information & Docs : [Grapnel](https://github.com/baseprime/grapnel)
-
-
 ```ts 
 Router( options?:GrapnelOptions ) : GrapnelInstance
 ```
 
+Grapnel, the smallest Javascript router with named parameters.
+
+Documentation : https://github.com/baseprime/grapnel
+
 ## Usage
 
 ```js
-import Router from 'jails.pandora/router'
+import { Router } from 'jails.std/router'
 
 const router = new Router()
 

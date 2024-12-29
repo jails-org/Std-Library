@@ -1,5 +1,9 @@
 # lazyload
 
+```ts 
+LazyLoad ( options: LazyLoadOptions ): LazyLoadInstance
+```
+
 A package to deal with lazy loading images.
 It's in fact the [vanilla-lazyload](https://github.com/verlok/vanilla-lazyload) library, so anything you need to know it's on their documentation.
 
@@ -7,7 +11,7 @@ It's in fact the [vanilla-lazyload](https://github.com/verlok/vanilla-lazyload) 
 
 ```ts 
 
-import Lazyload from 'jails.pandora/lazyload'
+import Lazyload from 'jails.std/lazyload'
 
 function main () {
 

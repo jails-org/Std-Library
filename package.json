@@ -1,11 +1,11 @@
 {
-  "name": "@jails-js/std",
-  "version": "0.0.0",
+  "name": "jails.std",
+  "version": "0.0.1",
   "description": "The Jails Standard Library",
   "types": "index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/jails-org/Pandora.git"
+    "url": "git+ssh://git@github.com/jails-org/std.git"
   },
   "author": "Javiani <eduardo.ottaviani@gmail.com>",
   "license": "MIT",
@@ -14,7 +14,6 @@
   },
   "dependencies": {
     "@javiani/onijs": "^0.0.17",
-    "@preact/signals-core": "^1.5.1",
     "@types/node": "^20.10.7",
     "glob": "^10.3.10",
     "grapnel": "0.6.4",

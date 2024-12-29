@@ -6,7 +6,7 @@
 		analytics.then( _ => window.gtag('event', 'buy_click', {...})
  */
 
-export const thirdPartyScript = (name) => {
+export const thirdParty = (name) => {
 
 	return new Promise((resolve, reject) => {
 		const script = document.querySelector(`script[data-name=${name}]`)

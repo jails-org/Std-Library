@@ -1,13 +1,10 @@
 # third-party
 
-A package that has some utilities functions to manage third-party cdn scripts like: **analytics**, **appDynamics**, etc.
-
-
-## thirdPartyScript()
 ```ts 
-thirdPartyScript( name: string ): Promise<HTMLScriptElement>
+thirdParty( name: string ): Promise<HTMLScriptElement>
 ```
 
+A package that has some utilities functions to manage third-party cdn scripts like: **analytics**, **appDynamics**, etc.
 Enables the developer to run third-party scripts at a convenient time, integrating those scripts into the app flow.
 
 <br />
@@ -27,13 +24,13 @@ That code will not be executed on page load due to its `type="text/third-party"`
 <br />
 <br />
 
-The `thirdPartyScript` will execute the text script code and then will load the cdn library if there's any `src` property setted.
+The `thirdParty` will execute the text script code and then will load the cdn library if there's any `src` property setted.
 This way you can have the control of third party code execution and when it should be executed inside your application flow.
 
 ```js
-import { thirdPartyScript } from 'jails.pandora/third-party'
+import { thirdParty } from 'jails.std/third-party'
 
-export const analytics = thirdPartyScript('analytics')
+export const analytics = thirdParty('analytics')
 
 function main() {
 
