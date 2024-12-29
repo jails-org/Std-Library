@@ -1,5 +1,5 @@
 
-export const importJs = ( url, { async = true } = {} ) => {
+export const importJs = ( url:string, { async = true }: Options = {} as Options ) => {
 	return new Promise((resolve, reject) => {
 		const script = document.createElement('script')
 		script.src = url
@@ -8,4 +8,8 @@ export const importJs = ( url, { async = true } = {} ) => {
 		script.onerror = reject
 		document.head.appendChild(script)
 	})
+}
+
+type Options = {
+	async?:true
 }

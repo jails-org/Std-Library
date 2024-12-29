@@ -1,5 +1,5 @@
 
-export const importCss = ( url, options = null ) => {
+export const importCss = ( url: string, options = null ) => {
 	return new Promise((resolve, reject) => {
 		const link = document.createElement('link')
 		link.rel = 'stylesheet'

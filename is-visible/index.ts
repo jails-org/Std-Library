@@ -1,5 +1,5 @@
 
-export const isVisible = ( target, { root = null, rootMargin = '0px', threshold = 0 } = {}) => {
+export const isVisible = ( target:HTMLElement, { root = null, rootMargin = '0px', threshold = 0 }: Options = {} as Options) => {
 	return new Promise((resolve, reject) => {
 		const observer = new IntersectionObserver((entries) => {
 			entries.forEach( entry => {
@@ -11,4 +11,10 @@ export const isVisible = ( target, { root = null, rootMargin = '0px', threshold 
 		}, { root, rootMargin, threshold })
 		observer.observe( target )
 	})
+}
+
+type Options = {
+	root?: HTMLElement
+	rootMargin?: string 
+	threshold?: number
 }
