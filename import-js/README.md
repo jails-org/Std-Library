@@ -1,5 +1,5 @@
 
-## importJs
+# importJs
 ```ts 
 importJs( url: string, options? = { async = true } ) : Promise<Event>
 ```

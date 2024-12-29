@@ -1,5 +1,5 @@
 
-## importHtml
+# importHtml
 ```ts 
 importHtml( url: string, options?: fetchOptions ) : Promise<Response, string>
 ```

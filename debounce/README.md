@@ -1,5 +1,5 @@
 
-## debounce
+# debounce
 ```ts 
 debounce( fn: Function, timeInterval? = 250 )
 ```

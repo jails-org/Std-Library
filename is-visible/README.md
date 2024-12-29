@@ -1,5 +1,5 @@
 
-## isVisible
+# isVisible
 ```ts 
 isVisible( target: HTMLElement, { root = null, rootMargin :'0px', threshold: 0 }?: IntersectionObserverOptions )
 ```
