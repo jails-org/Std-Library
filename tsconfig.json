@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "rootDir": "./",
+        "target": "ESNext",
+        "moduleResolution": "node",
+        "allowImportingTsExtensions": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "esModuleInterop": true,
+        "noEmit": true
+    }
+}
