@@ -11,7 +11,7 @@ It's in fact the [vanilla-lazyload](https://github.com/verlok/vanilla-lazyload) 
 
 ```ts 
 
-import Lazyload from 'jails.std/lazyload'
+import { Lazyload } from 'jails.std/lazyload'
 
 function main () {
 

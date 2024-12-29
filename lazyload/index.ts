@@ -1,3 +1,3 @@
-import Lazyload from 'vanilla-lazyload'
+import VanillaLazyload from 'vanilla-lazyload'
 
-export default Lazyload
+export const Lazyload = VanillaLazyload
