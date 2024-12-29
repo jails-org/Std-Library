@@ -1,6 +1,6 @@
 {
   "name": "@jails-js/std",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "The Jails Standard Library",
   "types": "index.d.ts",
   "repository": {
