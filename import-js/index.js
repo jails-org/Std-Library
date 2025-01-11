@@ -1,1 +1,7 @@
-(function(e,t){typeof exports=="object"&&typeof module!="undefined"?t(exports):typeof define=="function"&&define.amd?define(["exports"],t):(e=typeof globalThis!="undefined"?globalThis:e||self,t(e["import-js"]={}))})(this,function(e){"use strict";const t=(o,{async:i=!0}={})=>new Promise((r,s)=>{const n=document.createElement("script");n.src=o,n.async=i,n.onload=r,n.onerror=s,document.head.appendChild(n)});e.importJs=t,Object.defineProperty(e,Symbol.toStringTag,{value:"Module"})});
+const c = (r, { async: t = !0 } = {}) => new Promise((n, o) => {
+  const e = document.createElement("script");
+  e.src = r, e.async = t, e.onload = n, e.onerror = o, document.head.appendChild(e);
+});
+export {
+  c as importJs
+};

@@ -1,1 +1,62 @@
-(function(r,u){typeof exports=="object"&&typeof module!="undefined"?u(exports):typeof define=="function"&&define.amd?define(["exports"],u):(r=typeof globalThis!="undefined"?globalThis:r||self,u(r.store={}))})(this,function(r){"use strict";var u=typeof globalThis!="undefined"?globalThis:typeof window!="undefined"?window:typeof global!="undefined"?global:typeof self!="undefined"?self:{};function S(n){return n&&n.__esModule&&Object.prototype.hasOwnProperty.call(n,"default")?n.default:n}var h={exports:{}};(function(n,F){(function(p,c){n.exports=c()})(u,()=>(()=>{var p={};return(()=>{var c=p;Object.defineProperty(c,"__esModule",{value:!0}),c.default=function(t,g){var l=[],d=new Set,f=M(t),j=function(){return f},y=function(e){if(e.call)return d.add(e),function(){d.delete(e)}},m=function(e,i){return l.push({action:e,payload:i}),new Promise(function(a){return T(function(o){return P({action:e,payload:i},a)})})},w=function(e){y(function(i,a){var o=a.action,b=a.payload;o in e&&e[o].call(null,i,{action:o,payload:b})})},P=function(e,i){var a=e.action,o=e.payload,b=o===void 0?{}:o;l.forEach(function(s){var v=s.action,O=s.payload,_=O===void 0?{}:O;if(v in g){var N=g[v].call(null,f,_,{getState:j,subscribe:y,dispatch:m,patternMatch:w});Object.assign(f,N)}else console.log("[Oni] Error -> No action [ ".concat(v," ] found."))}),l.length&&(d.forEach(function(s){return s(f,{action:a,payload:b})}),l=[]),i(f)};return{getState:j,subscribe:y,dispatch:m,patternMatch:w,destroy:function(){return d.clear()}}};var M=function(t){return JSON.parse(JSON.stringify(t))},T=typeof window=="undefined"?function(t){return t()}:function(t){return requestAnimationFrame(t)}})(),p})())})(h);var x=h.exports;const E=S(x);r.Store=E,Object.defineProperty(r,Symbol.toStringTag,{value:"Module"})});
+function _(t) {
+  return t && t.__esModule && Object.prototype.hasOwnProperty.call(t, "default") ? t.default : t;
+}
+var l = { exports: {} }, q = l.exports, x;
+function N() {
+  return x || (x = 1, function(t, F) {
+    (function(d, u) {
+      t.exports = u();
+    })(q, () => (() => {
+      var d = {};
+      return (() => {
+        var u = d;
+        Object.defineProperty(u, "__esModule", { value: !0 }), u.default = function(r, h) {
+          var c = [], f = /* @__PURE__ */ new Set(), i = S(r), j = function() {
+            return i;
+          }, p = function(n) {
+            if (n.call) return f.add(n), function() {
+              f.delete(n);
+            };
+          }, O = function(n, o) {
+            return c.push({ action: n, payload: o }), new Promise(function(a) {
+              return w(function(e) {
+                return E({ action: n, payload: o }, a);
+              });
+            });
+          }, b = function(n) {
+            p(function(o, a) {
+              var e = a.action, v = a.payload;
+              e in n && n[e].call(null, o, { action: e, payload: v });
+            });
+          }, E = function(n, o) {
+            var a = n.action, e = n.payload, v = e === void 0 ? {} : e;
+            c.forEach(function(s) {
+              var y = s.action, g = s.payload, m = g === void 0 ? {} : g;
+              if (y in h) {
+                var M = h[y].call(null, i, m, { getState: j, subscribe: p, dispatch: O, patternMatch: b });
+                Object.assign(i, M);
+              } else console.log("[Oni] Error -> No action [ ".concat(y, " ] found."));
+            }), c.length && (f.forEach(function(s) {
+              return s(i, { action: a, payload: v });
+            }), c = []), o(i);
+          };
+          return { getState: j, subscribe: p, dispatch: O, patternMatch: b, destroy: function() {
+            return f.clear();
+          } };
+        };
+        var S = function(r) {
+          return JSON.parse(JSON.stringify(r));
+        }, w = typeof window == "undefined" ? function(r) {
+          return r();
+        } : function(r) {
+          return requestAnimationFrame(r);
+        };
+      })(), d;
+    })());
+  }(l)), l.exports;
+}
+var P = N();
+const J = /* @__PURE__ */ _(P);
+export {
+  J as Store
+};

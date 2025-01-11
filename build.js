@@ -16,8 +16,10 @@ const files = globSync('./**/index.ts')
             lib: {
                 name,
                 entry: `./${dirname}/${filename}`,
-                formats:['umd'],
-                fileName: () => 'index.js'
+                formats:['umd', 'esm'],
+                fileName: (type) => {
+                    return type == 'umd' ? 'index.umd.js' : 'index.js' 
+                }
             },
             rollupOptions: {
                 output: {

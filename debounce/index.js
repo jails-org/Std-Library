@@ -1,1 +1,11 @@
-(function(e,t){typeof exports=="object"&&typeof module!="undefined"?t(exports):typeof define=="function"&&define.amd?define(["exports"],t):(e=typeof globalThis!="undefined"?globalThis:e||self,t(e.debounce={}))})(this,function(e){"use strict";const t=(o,i=250)=>{let n;return(...d)=>{clearTimeout(n),n=setTimeout(()=>{o.apply(void 0,d)},i)}};e.debounce=t,Object.defineProperty(e,Symbol.toStringTag,{value:"Module"})});
+const r = (t, n = 250) => {
+  let e;
+  return (...o) => {
+    clearTimeout(e), e = setTimeout(() => {
+      t.apply(void 0, o);
+    }, n);
+  };
+};
+export {
+  r as debounce
+};

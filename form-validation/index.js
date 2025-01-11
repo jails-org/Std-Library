@@ -1,1 +1,110 @@
-(function(s,t){typeof exports=="object"&&typeof module!="undefined"?t(exports):typeof define=="function"&&define.amd?define(["exports"],t):(s=typeof globalThis!="undefined"?globalThis:s||self,t(s["form-validation"]={}))})(this,function(s){"use strict";var G=Object.defineProperty,H=Object.defineProperties;var J=Object.getOwnPropertyDescriptors;var w=Object.getOwnPropertySymbols;var Q=Object.prototype.hasOwnProperty,R=Object.prototype.propertyIsEnumerable;var x=(s,t,o)=>t in s?G(s,t,{enumerable:!0,configurable:!0,writable:!0,value:o}):s[t]=o,k=(s,t)=>{for(var o in t||(t={}))Q.call(t,o)&&x(s,o,t[o]);if(w)for(var o of w(t))R.call(t,o)&&x(s,o,t[o]);return s},O=(s,t)=>H(s,J(t));const t="form-validation",o="[data-validation]",T="[data-mask]";function _({main:f,elm:c,state:r,on:l,emit:v,dependencies:F,trigger:I}){var A;const{validations:p,masks:D}=F,m=(A=c.querySelector("input,select,textarea"))==null?void 0:A.form;let g=y(m);f(e=>{l("input","input, textarea, select",z),l("input",T,q),l("focus",o,K),l("input",o,b("input")),l("change",o,b("change")),l("blur",o,b("blur")),m.addEventListener("reset",P),m.addEventListener("submit",$),N()});const N=()=>{if(!p)throw new Error("<form-validation> - No validations provided in dependencies");const e=S();r.set(n=>n.form.fields=e)},S=()=>{const e={};return g.forEach(n=>e[n]=""),e},b=e=>n=>{const a=n.target,d=a.name,u=M(a,m),E=a.dataset.validation.split(/\s/),h=[],L=r.get();E.forEach(i=>{if(i in p){const{ok:B,message:C}=p[i](u,a,m);B||h.push(C)}}),h.length?e==="input"?(g.add(a.name),r.set(i=>{i.form.isValid=!1,L.form.errors[d]&&h[0]!=L.form.errors[d]&&(i.form.errors[d]=h[0])})):(e==="blur"||e==="change")&&(g.add(a.name),r.set(i=>{i.form.errors[d]=h[0],i.form.isValid=!1})):(g.delete(a.name),r.set(i=>{delete i.form.errors[d],g.size||(i.form.isValid=!0)}))},z=e=>{const{name:n}=e.target,a=M(e.target,m);r.set(d=>d.form.fields[n]=a)},$=e=>{e.preventDefault(),I("blur",o);const a=r.get().form.errors;if(Object.keys(a).length)v(`${t}:error`,{errors:a});else{const u=j(e.target);v(`${t}:submit`,k({},u))}},q=e=>{let n=e.target.value;const{mask:a}=e.target.dataset;a.split(/s/).forEach(u=>{if(u&&u in D){const E=D[u];n=E(n,e.target,e.target.form)}}),r.set(u=>u.form.fields[e.target.name]=n||"")},K=e=>{r.set(n=>n.form.touched[e.target.name]=!0)},P=()=>{g=y(m),r.set({form:O(k({},V.form),{fields:S()})})}}const V={form:{errors:{},fields:{},touched:{},isValid:!1}},j=f=>{const c=new FormData(f),r={};for(let[l,v]of c)r[l]=v;return{formData:c,data:r}},M=(f,c)=>{const{name:r,type:l}=f;return l=="checkbox"?f.checked?f.value:"":c[r].value},y=f=>{const c=new Set;return Array.from(f.elements).filter(r=>r.name).forEach(r=>c.add(r.name)),c};s.default=_,s.model=V,Object.defineProperties(s,{__esModule:{value:!0},[Symbol.toStringTag]:{value:"Module"}})});
+var K = Object.defineProperty, T = Object.defineProperties;
+var B = Object.getOwnPropertyDescriptors;
+var A = Object.getOwnPropertySymbols;
+var C = Object.prototype.hasOwnProperty, G = Object.prototype.propertyIsEnumerable;
+var L = (s, r, e) => r in s ? K(s, r, { enumerable: !0, configurable: !0, writable: !0, value: e }) : s[r] = e, E = (s, r) => {
+  for (var e in r || (r = {}))
+    C.call(r, e) && L(s, e, r[e]);
+  if (A)
+    for (var e of A(r))
+      G.call(r, e) && L(s, e, r[e]);
+  return s;
+}, M = (s, r) => T(s, B(r));
+const w = "form-validation", m = "[data-validation]", H = "[data-mask]";
+function R({
+  main: s,
+  elm: r,
+  state: e,
+  on: i,
+  emit: g,
+  dependencies: y,
+  trigger: F
+}) {
+  var V;
+  const { validations: h, masks: b } = y, f = (V = r.querySelector("input,select,textarea")) == null ? void 0 : V.form;
+  let d = S(f);
+  s((t) => {
+    i("input", "input, textarea, select", N), i("input", H, z), i("focus", m, _), i("input", m, v("input")), i("change", m, v("change")), i("blur", m, v("blur")), f.addEventListener("reset", $), f.addEventListener("submit", O), I();
+  });
+  const I = () => {
+    if (!h)
+      throw new Error(
+        "<form-validation> - No validations provided in dependencies"
+      );
+    const t = k();
+    e.set((a) => a.form.fields = t);
+  }, k = () => {
+    const t = {};
+    return d.forEach((a) => t[a] = ""), t;
+  }, v = (t) => (a) => {
+    const o = a.target, l = o.name, c = x(o, f), p = o.dataset.validation.split(/\s/), u = [], D = e.get();
+    p.forEach((n) => {
+      if (n in h) {
+        const { ok: j, message: q } = h[n](
+          c,
+          o,
+          f
+        );
+        j || u.push(q);
+      }
+    }), u.length ? t === "input" ? (d.add(o.name), e.set((n) => {
+      n.form.isValid = !1, D.form.errors[l] && u[0] != D.form.errors[l] && (n.form.errors[l] = u[0]);
+    })) : (t === "blur" || t === "change") && (d.add(o.name), e.set((n) => {
+      n.form.errors[l] = u[0], n.form.isValid = !1;
+    })) : (d.delete(o.name), e.set((n) => {
+      delete n.form.errors[l], d.size || (n.form.isValid = !0);
+    }));
+  }, N = (t) => {
+    const { name: a } = t.target, o = x(t.target, f);
+    e.set((l) => l.form.fields[a] = o);
+  }, O = (t) => {
+    t.preventDefault(), F("blur", m);
+    const o = e.get().form.errors;
+    if (Object.keys(o).length)
+      g(`${w}:error`, { errors: o });
+    else {
+      const c = P(t.target);
+      g(`${w}:submit`, E({}, c));
+    }
+  }, z = (t) => {
+    let a = t.target.value;
+    const { mask: o } = t.target.dataset;
+    o.split(/s/).forEach((c) => {
+      if (c && c in b) {
+        const p = b[c];
+        a = p(a, t.target, t.target.form);
+      }
+    }), e.set((c) => c.form.fields[t.target.name] = a || "");
+  }, _ = (t) => {
+    e.set((a) => a.form.touched[t.target.name] = !0);
+  }, $ = () => {
+    d = S(f), e.set({
+      form: M(E({}, J.form), {
+        fields: k()
+      })
+    });
+  };
+}
+const J = {
+  form: {
+    errors: {},
+    fields: {},
+    touched: {},
+    isValid: !1
+  }
+}, P = (s) => {
+  const r = new FormData(s), e = {};
+  for (let [i, g] of r)
+    e[i] = g;
+  return { formData: r, data: e };
+}, x = (s, r) => {
+  const { name: e, type: i } = s;
+  return i == "checkbox" ? s.checked ? s.value : "" : r[e].value;
+}, S = (s) => {
+  const r = /* @__PURE__ */ new Set();
+  return Array.from(s.elements).filter((e) => e.name).forEach((e) => r.add(e.name)), r;
+};
+export {
+  R as default,
+  J as model
+};

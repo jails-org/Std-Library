@@ -1,1 +1,39 @@
-(function(o,r){typeof exports=="object"&&typeof module!="undefined"?r(exports):typeof define=="function"&&define.amd?define(["exports"],r):(o=typeof globalThis!="undefined"?globalThis:o||self,r(o.storage={}))})(this,function(o){"use strict";const r={local:{set(t,e){return localStorage.setItem(t,JSON.stringify(e)),e},get(t){let e=localStorage.getItem(t);try{e=JSON.parse(e)}catch(s){}return e},remove(t){let e=this.get(t);return localStorage.removeItem(t),e}},session:{set(t,e){return sessionStorage.setItem(t,JSON.stringify(e)),e},get(t){let e=sessionStorage.getItem(t);try{e=JSON.parse(e)}catch(s){}return e},remove(t){let e=this.get(t);return sessionStorage.removeItem(t),e}}};o.default=r,Object.defineProperties(o,{__esModule:{value:!0},[Symbol.toStringTag]:{value:"Module"}})});
+const s = {
+  local: {
+    set(t, e) {
+      return localStorage.setItem(t, JSON.stringify(e)), e;
+    },
+    get(t) {
+      let e = localStorage.getItem(t);
+      try {
+        e = JSON.parse(e);
+      } catch (r) {
+      }
+      return e;
+    },
+    remove(t) {
+      let e = this.get(t);
+      return localStorage.removeItem(t), e;
+    }
+  },
+  session: {
+    set(t, e) {
+      return sessionStorage.setItem(t, JSON.stringify(e)), e;
+    },
+    get(t) {
+      let e = sessionStorage.getItem(t);
+      try {
+        e = JSON.parse(e);
+      } catch (r) {
+      }
+      return e;
+    },
+    remove(t) {
+      let e = this.get(t);
+      return sessionStorage.removeItem(t), e;
+    }
+  }
+};
+export {
+  s as default
+};
