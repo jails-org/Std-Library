@@ -1,4 +1,4 @@
-# lazyload
+# lazyload-image
 
 ```ts 
 LazyLoad ( options: LazyLoadOptions ): LazyLoadInstance
@@ -11,7 +11,7 @@ It's in fact the [vanilla-lazyload](https://github.com/verlok/vanilla-lazyload) 
 
 ```ts 
 
-import { Lazyload } from 'jails.std/lazyload'
+import { Lazyload } from 'jails.std/lazyload-image'
 
 function main () {
 
