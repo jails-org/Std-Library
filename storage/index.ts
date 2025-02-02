@@ -1,5 +1,5 @@
 
-export default {
+export const storage = {
 
 	local : {
 		set( name: string, data ){
