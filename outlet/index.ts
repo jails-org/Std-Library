@@ -16,7 +16,7 @@ export const Outlet = ({ target: outlet }) => {
 				const selector = 'script[name="outlet-script"]' 
 				outlet.innerHTML = originalOutlet
 				document.head.querySelector(selector).remove()
-				return Promise.resolve() 
+				return Promise.resolve(outlet) 
 			}
 			
 			outlet.innerHTML = `<${name}></${name}>`
@@ -25,7 +25,7 @@ export const Outlet = ({ target: outlet }) => {
 				const script = document.createElement('script')
 				script.setAttribute('name', 'outlet-script')
 				script.src = path
-				script.onload = resolve
+				script.onload = () => resolve(outlet)
 				script.onerror = reject
 				document.head.appendChild(script)
 			})

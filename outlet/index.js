@@ -469,11 +469,11 @@ const q = ({ target: h }) => {
     renderJS(M, b) {
       if (!b && !M) {
         const A = 'script[name="outlet-script"]';
-        return h.innerHTML = g, document.head.querySelector(A).remove(), Promise.resolve();
+        return h.innerHTML = g, document.head.querySelector(A).remove(), Promise.resolve(h);
       }
       return h.innerHTML = `<${M}></${M}>`, new Promise((A, H) => {
         const T = document.createElement("script");
-        T.setAttribute("name", "outlet-script"), T.src = b, T.onload = A, T.onerror = H, document.head.appendChild(T);
+        T.setAttribute("name", "outlet-script"), T.src = b, T.onload = () => A(h), T.onerror = H, document.head.appendChild(T);
       }).catch((A) => {
         throw "TypeError: Failed to fetch";
       });
