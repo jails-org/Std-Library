@@ -28,7 +28,7 @@ outlet.render() // Renders the initial state from the page before rendering loca
 
 ## .renderJS
 ```ts 
-renderJS( element: string, url: string ) : Promise<target: HTMLElement>
+renderJS( element: string, url: string ) : Promise<element: HTMLElement>
 ```
 
 If you have a JavaScript-based SPA hosted at a URL—meaning the script is self-executing and handles rendering the HTML, CSS, and JavaScript functionalities—you can use the renderJS method.
