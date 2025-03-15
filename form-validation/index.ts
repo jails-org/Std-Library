@@ -19,10 +19,11 @@ export default function formValidation({
 	main((_) => {
 		on('input', 'input, textarea, select', update)
 		on('input', DMASK, handleMask)
-		on('focus', DVALIDATION, touch)
 		on('input', DVALIDATION, validate('input'))
 		on('change', DVALIDATION, validate('change'))
 		on('blur', DVALIDATION, validate('blur'))
+		on('focus', 'input, textarea, select', onfocus)
+		on('blur', 'input, textarea, select', onblur)
 
 		form.addEventListener('reset', reset)
 		form.addEventListener('submit', onsubmit)
@@ -37,13 +38,28 @@ export default function formValidation({
 			)
 		}
 		const fields = getInitialValues()
-		state.set((s) => (s.form.fields = fields))
+		state.set((s) => (s.form.values = fields))
 	}
 
 	const getInitialValues = () => {
 		const fields_ = {}
 		fields.forEach((name) => (fields_[name] = ''))
 		return fields_
+	}
+
+	const onfocus = (e) => {
+		const name = e.target.name
+		state.set((s) => {
+			s.form.touched[name] = true
+			s.form.focused[name] = true
+		})
+	}
+
+	const onblur = (e) => {
+		const name = e.target.name
+		state.set((s) => {
+			s.form.focused[name] = false
+		})
 	}
 
 	const validate = (type) => (e) => {
@@ -100,7 +116,7 @@ export default function formValidation({
 	const update = (e) => {
 		const { name } = e.target
 		const value = getValueOfField(e.target, form)
-		state.set((s) => (s.form.fields[name] = value))
+		state.set((s) => (s.form.values[name] = value))
 	}
 
 	const onsubmit = (e) => {
@@ -131,11 +147,7 @@ export default function formValidation({
 			}
 		})
 
-		state.set((s) => (s.form.fields[e.target.name] = value || ''))
-	}
-
-	const touch = (e) => {
-		state.set((s) => (s.form.touched[e.target.name] = true))
+		state.set((s) => (s.form.values[e.target.name] = value || ''))
 	}
 
 	const reset = () => {
@@ -143,8 +155,8 @@ export default function formValidation({
 		state.set({
 			form: {
 				...model.form,
-				fields: getInitialValues(),
-			},
+				values: getInitialValues()
+			}
 		})
 	}
 }
@@ -152,10 +164,11 @@ export default function formValidation({
 export const model = {
 	form: {
 		errors: {},
-		fields: {},
+		values: {},
 		touched: {},
 		isValid: false,
-	},
+		focused: {}
+	}
 }
 
 const serialize = (form) => {
