@@ -1,6 +1,6 @@
 {
   "name": "jails.std",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "The Jails Standard Library",
   "types": "index.d.ts",
   "repository": {
@@ -13,7 +13,7 @@
     "build": "node build"
   },
   "dependencies": {
-    "@javiani/onijs": "^0.0.17",
+    "@javiani/onijs": "^0.0.18",
     "@types/node": "^20.10.7",
     "glob": "^10.3.10",
     "grapnel": "0.6.4",

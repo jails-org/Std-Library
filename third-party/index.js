@@ -1,15 +1,1 @@
-const thirdParty = (name) => new Promise((resolve, reject) => {
-  const script = document.querySelector(`script[data-name=${name}]`);
-  if (!script)
-    reject({ error: "ThirdPartyScriptError", message: `There is no script with data-name: ${name} in the document.` });
-  else if (script.src) {
-    const e = document.createElement("script");
-    e.onload = () => {
-      new Function(script.text)(), resolve(e);
-    }, e.src = script.src, document.head.appendChild(e);
-  } else
-    eval(script.text), resolve(script);
-});
-export {
-  thirdParty
-};
+(function(e,t){typeof exports=="object"&&typeof module!="undefined"?t(exports):typeof define=="function"&&define.amd?define(["exports"],t):(e=typeof globalThis!="undefined"?globalThis:e||self,t(e["third-party"]={}))})(this,function(exports){"use strict";const thirdParty=name=>new Promise((resolve,reject)=>{const script=document.querySelector(`script[data-name=${name}]`);if(!script)reject({error:"ThirdPartyScriptError",message:`There is no script with data-name: ${name} in the document.`});else if(script.src){const e=document.createElement("script");e.onload=()=>{new Function(script.text)(),resolve(e)},e.src=script.src,document.head.appendChild(e)}else eval(script.text),resolve(script)});exports.thirdParty=thirdParty,Object.defineProperty(exports,Symbol.toStringTag,{value:"Module"})});

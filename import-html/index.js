@@ -1,4 +1,1 @@
-const l = (e, n = null) => fetch(e, n).then((t) => t.text().then((h) => ({ response: t, html: h })));
-export {
-  l as importHtml
-};
+(function(e,t){typeof exports=="object"&&typeof module!="undefined"?t(exports):typeof define=="function"&&define.amd?define(["exports"],t):(e=typeof globalThis!="undefined"?globalThis:e||self,t(e["import-html"]={}))})(this,function(e){"use strict";const t=(i,o=null)=>fetch(i,o).then(n=>n.text().then(f=>({response:n,html:f})));e.importHtml=t,Object.defineProperty(e,Symbol.toStringTag,{value:"Module"})});

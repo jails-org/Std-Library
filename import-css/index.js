@@ -1,7 +1,1 @@
-const l = (n, r = null) => new Promise((o, t) => {
-  const e = document.createElement("link");
-  e.rel = "stylesheet", e.href = n, e.onload = o, e.onerror = t, document.head.appendChild(e);
-});
-export {
-  l as importCss
-};
+(function(e,n){typeof exports=="object"&&typeof module!="undefined"?n(exports):typeof define=="function"&&define.amd?define(["exports"],n):(e=typeof globalThis!="undefined"?globalThis:e||self,n(e["import-css"]={}))})(this,function(e){"use strict";const n=(o,d=null)=>new Promise((i,s)=>{const t=document.createElement("link");t.rel="stylesheet",t.href=o,t.onload=i,t.onerror=s,document.head.appendChild(t)});e.importCss=n,Object.defineProperty(e,Symbol.toStringTag,{value:"Module"})});

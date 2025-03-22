@@ -1,1 +1,0 @@
-(function(e,t){typeof exports=="object"&&typeof module!="undefined"?t(exports):typeof define=="function"&&define.amd?define(["exports"],t):(e=typeof globalThis!="undefined"?globalThis:e||self,t(e.delay={}))})(this,function(e){"use strict";const t=(n=100)=>i=>new Promise(o=>{setTimeout(()=>o(i),n)});e.delay=t,Object.defineProperty(e,Symbol.toStringTag,{value:"Module"})});

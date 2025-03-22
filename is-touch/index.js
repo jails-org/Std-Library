@@ -1,4 +1,1 @@
-const o = () => "ontouchstart" in window;
-export {
-  o as isTouch
-};
+(function(e,t){typeof exports=="object"&&typeof module!="undefined"?t(exports):typeof define=="function"&&define.amd?define(["exports"],t):(e=typeof globalThis!="undefined"?globalThis:e||self,t(e["is-touch"]={}))})(this,function(e){"use strict";const t=()=>"ontouchstart"in window;e.isTouch=t,Object.defineProperty(e,Symbol.toStringTag,{value:"Module"})});

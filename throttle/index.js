@@ -1,9 +1,1 @@
-const n = (e, o = 100) => {
-  let t = Date.now();
-  return () => {
-    t + o - Date.now() < 0 && (e(), t = Date.now());
-  };
-};
-export {
-  n as throttle
-};
+(function(e,t){typeof exports=="object"&&typeof module!="undefined"?t(exports):typeof define=="function"&&define.amd?define(["exports"],t):(e=typeof globalThis!="undefined"?globalThis:e||self,t(e.throttle={}))})(this,function(e){"use strict";const t=(o,i=100)=>{let n=Date.now();return()=>{n+i-Date.now()<0&&(o(),n=Date.now())}};e.throttle=t,Object.defineProperty(e,Symbol.toStringTag,{value:"Module"})});

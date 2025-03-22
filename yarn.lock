@@ -139,10 +139,10 @@
     wrap-ansi "^8.1.0"
     wrap-ansi-cjs "npm:wrap-ansi@^7.0.0"
 
-"@javiani/onijs@^0.0.17":
-  version "0.0.17"
-  resolved "https://registry.yarnpkg.com/@javiani/onijs/-/onijs-0.0.17.tgz#3603b54e9a562f8ef5a528cf767e4385978874b9"
-  integrity sha512-6fPQmJ5OTanZAkX341XGb+ROuPQg8+cYGKXVOiA8NqGdcttXHcBhgXRhIXz3jfy0/aSsEVL6kDJS8i9hO1KLNw==
+"@javiani/onijs@^0.0.18":
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/@javiani/onijs/-/onijs-0.0.18.tgz#6173dc9b5e9b7a3742d042a8d350060b9933b4d0"
+  integrity sha512-LvNzJn6q6IY5F9bZSGlBxa6UqAmz0Kd712qRarlXnI0JjCvgYKaW1T9ep38yce8dt2TeoeR91k/DKzLqbX7h8A==
 
 "@pkgjs/parseargs@^0.11.0":
   version "0.11.0"

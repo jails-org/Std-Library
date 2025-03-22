@@ -1,4 +1,1 @@
-const e = (r) => new URLSearchParams(location.search).get(r);
-export {
-  e as querystring
-};
+(function(e,n){typeof exports=="object"&&typeof module!="undefined"?n(exports):typeof define=="function"&&define.amd?define(["exports"],n):(e=typeof globalThis!="undefined"?globalThis:e||self,n(e.querystring={}))})(this,function(e){"use strict";const n=t=>new URLSearchParams(location.search).get(t);e.querystring=n,Object.defineProperty(e,Symbol.toStringTag,{value:"Module"})});
