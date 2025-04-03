@@ -1,3 +1,12 @@
+declare const window: any
+
+export const Shell = (dependencies) => {
+
+	return window.___Shell___ = {
+		...dependencies,
+		...window.___Shell___
+	}
+}
 
 export const mfe = ({ timeout =  5000 } = {}) => {
 	
