@@ -1,19 +1,19 @@
-var _ = Object.defineProperty;
+var y = Object.defineProperty;
 var d = Object.getOwnPropertySymbols;
-var g = Object.prototype.hasOwnProperty, E = Object.prototype.propertyIsEnumerable;
-var y = (e, t, r) => t in e ? _(e, t, { enumerable: !0, configurable: !0, writable: !0, value: r }) : e[t] = r, f = (e, t) => {
+var S = Object.prototype.hasOwnProperty, E = Object.prototype.propertyIsEnumerable;
+var f = (e, t, r) => t in e ? y(e, t, { enumerable: !0, configurable: !0, writable: !0, value: r }) : e[t] = r, u = (e, t) => {
   for (var r in t || (t = {}))
-    g.call(t, r) && y(e, r, t[r]);
+    S.call(t, r) && f(e, r, t[r]);
   if (d)
     for (var r of d(t))
-      E.call(t, r) && y(e, r, t[r]);
+      E.call(t, r) && f(e, r, t[r]);
   return e;
 };
-const L = (e) => window.___Shell___ = f(f({}, e), window.___Shell___), b = ({ timeout: e = 5e3 } = {}) => {
+const L = ({ timeout: e = 5e3 } = {}) => {
   const t = {};
   return {
-    renderJS({ target: r, tag: n, src: s }) {
-      return r.innerHTML = `<${n}></${n}>`, new Promise((c, i) => {
+    renderJS({ target: r, tag: l, src: s }) {
+      return r.innerHTML = `<${l}></${l}>`, new Promise((c, i) => {
         const o = document.createElement("script");
         o.src = s, o.async = !0, o.onload = () => c(r), o.onerror = (a) => i({
           type: "error",
@@ -21,28 +21,28 @@ const L = (e) => window.___Shell___ = f(f({}, e), window.___Shell___), b = ({ ti
         }), document.head.appendChild(o);
       });
     },
-    render(r, n) {
-      return fetch(n).then((s) => s.text()).then((s) => {
-        const c = [], i = new URL(n), a = new DOMParser().parseFromString(s, "text/html"), h = a.documentElement.querySelector("body");
-        if (!t[n]) {
-          const p = h.querySelectorAll('script, link[rel="stylesheet"], style'), m = a.documentElement.querySelector("head");
-          p.forEach((l) => {
-            m.appendChild(l);
-          }), m.querySelectorAll('link[rel="stylesheet"], style, script').forEach((l) => {
-            if (l.localName == "script" && l.src) {
-              const u = document.createElement("script");
-              u.setAttribute("type", "module"), u.setAttribute("src", l.getAttribute("src")), w(u, i, c, e), document.head.appendChild(u);
+    render(r, l) {
+      return fetch(l).then((s) => s.text()).then((s) => {
+        const c = [], i = new URL(l), a = new DOMParser().parseFromString(s, "text/html"), h = a.documentElement.querySelector("body");
+        if (!t[l]) {
+          const p = h.querySelectorAll('script, link[rel="stylesheet"], style'), _ = a.documentElement.querySelector("head");
+          p.forEach((n) => {
+            _.appendChild(n);
+          }), _.querySelectorAll('link[rel="stylesheet"], style, script').forEach((n) => {
+            if (n.localName == "script" && n.src) {
+              const m = document.createElement("script");
+              m.setAttribute("type", "module"), m.setAttribute("src", n.getAttribute("src")), w(m, i, c, e), document.head.appendChild(m);
             } else
-              w(l, i, c, e), document.head.appendChild(l);
-          }), t[n] = c;
+              w(n, i, c, e), document.head.appendChild(n);
+          }), t[l] = c;
         }
-        return new Promise((p, m) => {
-          Promise.all(t[n]).then(() => {
+        return new Promise((p, _) => {
+          Promise.all(t[l]).then(() => {
             r.innerHTML = h == null ? void 0 : h.innerHTML, p(r);
-          }).catch((l) => {
-            m({
+          }).catch((n) => {
+            _({
               type: "error",
-              message: "[mfe] - Unexpected error : " + l
+              message: "[mfe] - Unexpected error : " + n
             });
           });
         });
@@ -51,7 +51,7 @@ const L = (e) => window.___Shell___ = f(f({}, e), window.___Shell___), b = ({ ti
       });
     }
   };
-}, w = (e, t, r, n) => {
+}, b = (e = {}) => window.___Shell___ ? (window.___Shell___ = u(u({}, e), window.___Shell___), window.___Shell___) : (window.___Shell___ = u({}, e), window.___Shell___), w = (e, t, r, l) => {
   if (e.src && e.getAttribute("src").startsWith("/")) {
     const { pathname: s, search: c } = new URL(e.src);
     e.src = t.origin + s + c;
@@ -65,7 +65,7 @@ const L = (e) => window.___Shell___ = f(f({}, e), window.___Shell___), b = ({ ti
         type: "error",
         message: `[mfe] - Timeout exceeded ${e} resolving after milisseconds.`
       });
-    }, n);
+    }, l);
     e.addEventListener("load", () => {
       clearTimeout(i), s(e);
     }), e.addEventListener("error", () => {
@@ -77,6 +77,6 @@ const L = (e) => window.___Shell___ = f(f({}, e), window.___Shell___), b = ({ ti
   })), r;
 };
 export {
-  L as Shell,
-  b as mfe
+  b as Shell,
+  L as mfe
 };

@@ -50,3 +50,41 @@ function main () {
     .catch( err => console.error(err) )
 }
 ```
+
+### Shell()
+You might need to share data from your shell to your microfrontends.
+Instead of doing that manually by using a global variable, you can use `Shell()` function to create 
+a channel where you can communicate your shell with your MFE's.
+
+Example:
+
+#### On shell
+
+`main.ts`
+
+```ts
+import { Shell } from 'jails.std/mfe'
+
+export const shell = Shell({
+  somevariable,
+  someFunction, 
+  someInstance,
+  ...etc
+})
+
+```
+
+#### On MFE
+
+`main.ts`
+
+```ts 
+import { Shell } from 'jails.std/mfe'
+
+export const shell = Shell({
+  somevariable,
+  somefunction
+})
+```
+
+You have to guarantee that you'll provide the MFE dependencies on your Shell aswell.

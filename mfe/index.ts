@@ -1,13 +1,5 @@
 declare const window: any
 
-export const Shell = (dependencies) => {
-
-	return window.___Shell___ = {
-		...dependencies,
-		...window.___Shell___
-	}
-}
-
 export const mfe = ({ timeout =  5000 } = {}) => {
 	
 	const cache = {}
@@ -85,6 +77,17 @@ export const mfe = ({ timeout =  5000 } = {}) => {
 					throw err 
 				})
 		}
+	}
+}
+
+export const Shell = ( config = {} ) => {
+	
+	if( !window.___Shell___ ) {
+		window.___Shell___ = { ...config }
+		return window.___Shell___
+	} else {
+		window.___Shell___ = { ...config, ...window.___Shell___ }
+		return window.___Shell___
 	}
 }
 
