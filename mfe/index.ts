@@ -25,6 +25,16 @@ export const mfe = ({ timeout =  5000 } = {}) => {
 
 		render( target, path ) {
 
+			if( !target ) {
+				return new Promise((resolve, reject) => {
+					throw {
+						type: 'not-found',
+						data: { target, path },
+						message: '[mfe] - Target not found'
+					}
+				})
+			}
+
 			return fetch( path )
 				.then( res => res.text() )
 				.then( html => {

@@ -1,19 +1,19 @@
 var y = Object.defineProperty;
-var d = Object.getOwnPropertySymbols;
+var p = Object.getOwnPropertySymbols;
 var S = Object.prototype.hasOwnProperty, E = Object.prototype.propertyIsEnumerable;
 var f = (e, t, r) => t in e ? y(e, t, { enumerable: !0, configurable: !0, writable: !0, value: r }) : e[t] = r, u = (e, t) => {
   for (var r in t || (t = {}))
     S.call(t, r) && f(e, r, t[r]);
-  if (d)
-    for (var r of d(t))
+  if (p)
+    for (var r of p(t))
       E.call(t, r) && f(e, r, t[r]);
   return e;
 };
 const L = ({ timeout: e = 5e3 } = {}) => {
   const t = {};
   return {
-    renderJS({ target: r, tag: l, src: s }) {
-      return r.innerHTML = `<${l}></${l}>`, new Promise((c, i) => {
+    renderJS({ target: r, tag: n, src: s }) {
+      return r.innerHTML = `<${n}></${n}>`, new Promise((c, i) => {
         const o = document.createElement("script");
         o.src = s, o.async = !0, o.onload = () => c(r), o.onerror = (a) => i({
           type: "error",
@@ -21,37 +21,43 @@ const L = ({ timeout: e = 5e3 } = {}) => {
         }), document.head.appendChild(o);
       });
     },
-    render(r, l) {
-      return fetch(l).then((s) => s.text()).then((s) => {
-        const c = [], i = new URL(l), a = new DOMParser().parseFromString(s, "text/html"), h = a.documentElement.querySelector("body");
-        if (!t[l]) {
-          const p = h.querySelectorAll('script, link[rel="stylesheet"], style'), _ = a.documentElement.querySelector("head");
-          p.forEach((n) => {
-            _.appendChild(n);
-          }), _.querySelectorAll('link[rel="stylesheet"], style, script').forEach((n) => {
-            if (n.localName == "script" && n.src) {
-              const m = document.createElement("script");
-              m.setAttribute("type", "module"), m.setAttribute("src", n.getAttribute("src")), w(m, i, c, e), document.head.appendChild(m);
+    render(r, n) {
+      return r ? fetch(n).then((s) => s.text()).then((s) => {
+        const c = [], i = new URL(n), a = new DOMParser().parseFromString(s, "text/html"), h = a.documentElement.querySelector("body");
+        if (!t[n]) {
+          const d = h.querySelectorAll('script, link[rel="stylesheet"], style'), m = a.documentElement.querySelector("head");
+          d.forEach((l) => {
+            m.appendChild(l);
+          }), m.querySelectorAll('link[rel="stylesheet"], style, script').forEach((l) => {
+            if (l.localName == "script" && l.src) {
+              const _ = document.createElement("script");
+              _.setAttribute("type", "module"), _.setAttribute("src", l.getAttribute("src")), w(_, i, c, e), document.head.appendChild(_);
             } else
-              w(n, i, c, e), document.head.appendChild(n);
-          }), t[l] = c;
+              w(l, i, c, e), document.head.appendChild(l);
+          }), t[n] = c;
         }
-        return new Promise((p, _) => {
-          Promise.all(t[l]).then(() => {
-            r.innerHTML = h == null ? void 0 : h.innerHTML, p(r);
-          }).catch((n) => {
-            _({
+        return new Promise((d, m) => {
+          Promise.all(t[n]).then(() => {
+            r.innerHTML = h == null ? void 0 : h.innerHTML, d(r);
+          }).catch((l) => {
+            m({
               type: "error",
-              message: "[mfe] - Unexpected error : " + n
+              message: "[mfe] - Unexpected error : " + l
             });
           });
         });
       }).catch((s) => {
         throw s;
+      }) : new Promise((s, c) => {
+        throw {
+          type: "not-found",
+          data: { target: r, path: n },
+          message: "[mfe] - Target not found"
+        };
       });
     }
   };
-}, b = (e = {}) => window.___Shell___ ? (window.___Shell___ = u(u({}, e), window.___Shell___), window.___Shell___) : (window.___Shell___ = u({}, e), window.___Shell___), w = (e, t, r, l) => {
+}, T = (e = {}) => window.___Shell___ ? (window.___Shell___ = u(u({}, e), window.___Shell___), window.___Shell___) : (window.___Shell___ = u({}, e), window.___Shell___), w = (e, t, r, n) => {
   if (e.src && e.getAttribute("src").startsWith("/")) {
     const { pathname: s, search: c } = new URL(e.src);
     e.src = t.origin + s + c;
@@ -65,7 +71,7 @@ const L = ({ timeout: e = 5e3 } = {}) => {
         type: "error",
         message: `[mfe] - Timeout exceeded ${e} resolving after milisseconds.`
       });
-    }, l);
+    }, n);
     e.addEventListener("load", () => {
       clearTimeout(i), s(e);
     }), e.addEventListener("error", () => {
@@ -77,6 +83,6 @@ const L = ({ timeout: e = 5e3 } = {}) => {
   })), r;
 };
 export {
-  b as Shell,
+  T as Shell,
   L as mfe
 };
