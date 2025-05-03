@@ -23,7 +23,7 @@ export const mfe = ({ timeout =  5000 } = {}) => {
 			})
 		},
 
-		render( target, path ) {
+		async render( target: any, uri: string ) {
 
 			if( !target ) {
 				return new Promise((resolve, reject) => {
@@ -35,57 +35,87 @@ export const mfe = ({ timeout =  5000 } = {}) => {
 				})
 			}
 
-			return fetch( path )
-				.then( res => res.text() )
-				.then( html => {
-
-					const promises 	= []
-					const url 		= new URL( path )
-					const parser 	= new DOMParser()
-					const doc 		= parser.parseFromString( html, 'text/html' )
-					const content 	= doc.documentElement.querySelector('body')
+			if( !cache[uri] ) {
+				
+				cache[uri] 			= []
+				const html 	 		= await fetch( uri ).then( res => res.text() )
+				const parser	 	= new DOMParser()
+				const doc 	 		= parser.parseFromString( html, 'text/html' )
+				const assets 		= doc.querySelectorAll( 'link[rel="stylesheet"], style' )
+				const scripts 		= doc.querySelectorAll( 'script' )
+				const url 	 		= new URL( uri )
+				const promises: any = []
+		
+				assets.forEach((asset: any) => {
 					
-					if( !cache[path] ) {
-						const all  = content.querySelectorAll('script, link[rel="stylesheet"], style')
-						const head = doc.documentElement.querySelector('head')
+					switch( asset.localName ) {
 						
-						all.forEach( node => { head.appendChild(node) })
-
-						head.querySelectorAll('link[rel="stylesheet"], style, script')
-							.forEach( node => {
-								if( node.localName == 'script' && node.src ) {
-									const script = document.createElement('script')
-									script.setAttribute('type', 'module')
-									script.setAttribute('src', node.getAttribute('src'))
-									baseUrls( script, url, promises, timeout )
-									document.head.appendChild(script)
-								} else {
-									baseUrls( node, url, promises, timeout )
-									document.head.appendChild(node)
-								}
-							})
-
-						cache[ path ] = promises
+						case 'link':
+		
+							const link = document.createElement( 'link' )
+							
+							link.setAttribute( 'rel', 'stylesheet' )
+							link.setAttribute( 'href',  new URL( asset.getAttribute( 'href' ) || '', url ).href )
+							
+							promises.push( new Promise((resolve, reject) => {
+								link.onload = () => resolve( true )
+								link.onerror = () => reject( new Error( `Failed to load ${link.href}` ))	
+							}))
+							
+							document.head.appendChild( link )
+		
+						break
+		
+						case 'style': 
+		
+							const style = document.createElement( 'style' )
+							style.innerHTML = asset.innerHTML
+							document.head.appendChild( style )
+		
+						break
 					}
-					
-					return new Promise((resolve, reject) => {
-						Promise.all( cache[path] )
-							.then(() => {
-								target.innerHTML = content?.innerHTML
-								resolve(target)
-							})
-							.catch(err => {
-								reject({
-									type: 'error',
-									message: '[mfe] - Unexpected error : ' + err
-								})
-							})
+		
+				})
+		
+				const promiseScripts = []
+		
+				scripts.forEach( script => {
+					promiseScripts.push(() => {
+						return new Promise((resolve, reject) => {
+							const s = document.createElement('script')
+				
+							// Copy attributes
+							for (const attr of script.attributes) {
+								s.setAttribute(attr.name, attr.value)
+							}
+				
+							if( script.text ) {
+								s.text = script.text 
+								document.head.appendChild(s)
+								resolve()
+								return 
+							}
+							
+							if( script.src ) {
+								s.setAttribute( 'src',  new URL( script.getAttribute( 'src' ) || '', url ).href )
+								s.onload = resolve 
+								s.onerror = reject
+								document.head.appendChild(s)
+							}
+						})
 					})
 				})
-
-				.catch( err => {
-					throw err 
+		
+				return new Promise((resolve) => {
+					Promise.allSettled( promises )
+						.then(() => target.innerHTML = doc.body.innerHTML )
+						.then(() => runSequentially(promiseScripts))
+						.then(() => setTimeout(resolve, 1000))
+						.then(() => cache[uri].forEach(({target}) => target.innerHTML = doc.body.innerHTML))
 				})
+			} else {
+				cache[uri].push({ target })
+			}
 		}
 	}
 }
@@ -101,41 +131,11 @@ export const Shell = ( config = {} ) => {
 	}
 }
 
-const baseUrls = ( node, url, promises, timeout ) => {
-
-	if( node.src && node.getAttribute('src').startsWith('/') ) {
-		const { pathname, search } = new URL(node.src)
-		node.src = url.origin + pathname + search
-	} else if( node.href && node.getAttribute('href').startsWith('/') ) {
-		const { pathname, search } = new URL(node.href)
-		node.href = url.origin + pathname + search
+const runSequentially = async ( promiseFactories ) => {
+	const results = []
+	for (const factory of promiseFactories) {
+		const result = await factory()
+		results.push(result)
 	}
-
-	if( node.src || (node.href && node.rel == 'stylesheet') ) {
-		
-		promises.push( new Promise((resolve, reject) => {
-			
-			const clock = setTimeout(() => {
-				reject({
-					type: 'error',
-					message: `[mfe] - Timeout exceeded ${node} resolving after milisseconds.`
-				})
-			}, timeout)
-	
-			node.addEventListener('load', () => {
-				clearTimeout(clock)
-				resolve(node)
-			})
-	
-			node.addEventListener('error', () => {
-				clearTimeout(clock)
-				reject({
-					type: 'error',
-					message: `[mfe] - Error to fetch : ${ node.src }`
-				})
-			})
-		}))
-	}
-	
-	return promises
+	return results
 }
