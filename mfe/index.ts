@@ -29,7 +29,7 @@ export const mfe = ({ timeout =  5000 } = {}) => {
 				return new Promise((resolve, reject) => {
 					throw {
 						type: 'not-found',
-						data: { target, path },
+						data: { target, path: uri },
 						message: '[mfe] - Target not found'
 					}
 				})

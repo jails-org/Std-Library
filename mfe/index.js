@@ -9,18 +9,18 @@ var L = (n, e, t) => e in n ? T(n, e, { enumerable: !0, configurable: !0, writab
       E.call(e, t) && L(n, t, e[t]);
   return n;
 };
-var w = (n, e, t) => new Promise((l, s) => {
+var w = (n, e, t) => new Promise((l, o) => {
   var h = (r) => {
     try {
       a(t.next(r));
     } catch (d) {
-      s(d);
+      o(d);
     }
   }, u = (r) => {
     try {
       a(t.throw(r));
     } catch (d) {
-      s(d);
+      o(d);
     }
   }, a = (r) => r.done ? l(r.value) : Promise.resolve(r.value).then(h, u);
   a((t = t.apply(n, e)).next());
@@ -28,8 +28,8 @@ var w = (n, e, t) => new Promise((l, s) => {
 const P = ({ timeout: n = 5e3 } = {}) => {
   const e = {};
   return {
-    renderJS({ target: l, tag: s, src: h }) {
-      return l.innerHTML = `<${s}></${s}>`, new Promise((u, a) => {
+    renderJS({ target: l, tag: o, src: h }) {
+      return l.innerHTML = `<${o}></${o}>`, new Promise((u, a) => {
         const r = document.createElement("script");
         r.src = h, r.async = !0, r.onload = () => u(l), r.onerror = (d) => a({
           type: "error",
@@ -37,49 +37,49 @@ const P = ({ timeout: n = 5e3 } = {}) => {
         }), document.head.appendChild(r);
       });
     },
-    render(l, s) {
+    render(l, o) {
       return w(this, null, function* () {
         if (!l)
           return new Promise((h, u) => {
             throw {
               type: "not-found",
-              data: { target: l, path },
+              data: { target: l, path: o },
               message: "[mfe] - Target not found"
             };
           });
-        if (e[s])
-          e[s].push({ target: l });
+        if (e[o])
+          e[o].push({ target: l });
         else {
-          e[s] = [];
-          const h = yield fetch(s).then((o) => o.text()), a = new DOMParser().parseFromString(h, "text/html"), r = a.querySelectorAll('link[rel="stylesheet"], style'), d = a.querySelectorAll("script"), f = new URL(s), y = [];
-          r.forEach((o) => {
-            switch (o.localName) {
+          e[o] = [];
+          const h = yield fetch(o).then((s) => s.text()), a = new DOMParser().parseFromString(h, "text/html"), r = a.querySelectorAll('link[rel="stylesheet"], style'), d = a.querySelectorAll("script"), f = new URL(o), y = [];
+          r.forEach((s) => {
+            switch (s.localName) {
               case "link":
                 const c = document.createElement("link");
-                c.setAttribute("rel", "stylesheet"), c.setAttribute("href", new URL(o.getAttribute("href") || "", f).href), y.push(new Promise((i, m) => {
+                c.setAttribute("rel", "stylesheet"), c.setAttribute("href", new URL(s.getAttribute("href") || "", f).href), y.push(new Promise((i, m) => {
                   c.onload = () => i(!0), c.onerror = () => m(new Error(`Failed to load ${c.href}`));
                 })), document.head.appendChild(c);
                 break;
               case "style":
                 const _ = document.createElement("style");
-                _.innerHTML = o.innerHTML, document.head.appendChild(_);
+                _.innerHTML = s.innerHTML, document.head.appendChild(_);
                 break;
             }
           });
           const S = [];
-          return d.forEach((o) => {
+          return d.forEach((s) => {
             S.push(() => new Promise((c, _) => {
               const i = document.createElement("script");
-              for (const m of o.attributes)
+              for (const m of s.attributes)
                 i.setAttribute(m.name, m.value);
-              if (o.text) {
-                i.text = o.text, document.head.appendChild(i), c();
+              if (s.text) {
+                i.text = s.text, document.head.appendChild(i), c();
                 return;
               }
-              o.src && (i.setAttribute("src", new URL(o.getAttribute("src") || "", f).href), i.onload = c, i.onerror = _, document.head.appendChild(i));
+              s.src && (i.setAttribute("src", new URL(s.getAttribute("src") || "", f).href), i.onload = c, i.onerror = _, document.head.appendChild(i));
             }));
-          }), new Promise((o) => {
-            Promise.allSettled(y).then(() => l.innerHTML = a.body.innerHTML).then(() => M(S)).then(() => setTimeout(o, 1e3)).then(() => e[s].forEach(({ target: c }) => c.innerHTML = a.body.innerHTML));
+          }), new Promise((s) => {
+            Promise.allSettled(y).then(() => l.innerHTML = a.body.innerHTML).then(() => M(S)).then(() => setTimeout(s, 1e3)).then(() => e[o].forEach(({ target: c }) => c.innerHTML = a.body.innerHTML));
           });
         }
       });
