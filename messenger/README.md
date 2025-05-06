@@ -10,7 +10,7 @@ messenger({
 ```
 # 📬 Messenger API Documentation
 
-The `Messenger` utility provides a lightweight, secure interface for sending and receiving messages between windows or iframes using `postMessage`.
+The `messenger` utility provides a lightweight, secure interface for sending and receiving messages between windows or iframes using `postMessage`.
 
 ---
 
@@ -28,9 +28,9 @@ The `Messenger` utility provides a lightweight, secure interface for sending and
 ### Parent Page
 
 ```ts
-import { Messenger } from 'jails.std/messenger'
+import { messenger } from 'jails.std/messenger'
 
-const messenger = Messenger({
+const msg = messenger({
   target: document.getElementById('myIframe'), // <iframe id="myIframe" />
   accept: ['https://child-app.com'],           // Allowed origins
   actions: {
@@ -41,10 +41,10 @@ const messenger = Messenger({
 })
 
 // Send message to iframe
-messenger.dispatch('init', { user: 'Alice' })
+msg.dispatch('init', { user: 'Alice' })
 
 // Add more listeners later
-messenger.subscribe({
+msg.subscribe({
   status: (msg) => console.log('Status update:', msg)
 })
 ```
@@ -52,13 +52,13 @@ messenger.subscribe({
 ### Iframe Page
 
 ```ts
-const messenger = Messenger({
+const msg = messenger({
   target: window.parent,
   accept: ['https://parent-app.com'],
   actions: {
     init(data){
       console.log('Init from parent:', data)
-      messenger.dispatch('reply', { received: true })
+      msg.dispatch('reply', { received: true })
     }
   }
 })
@@ -68,7 +68,7 @@ const messenger = Messenger({
 
 ## 🧹 API
 
-### `Messenger(options)`
+### `messenger(options)`
 
 Creates a new Messenger instance.
 
@@ -88,7 +88,7 @@ Creates a new Messenger instance.
 Sends a message to the target window.
 
 ```ts
-messenger.dispatch('sayHello', { name: 'Bob' })
+msg.dispatch('sayHello', { name: 'Bob' })
 ```
 
 ---
@@ -98,7 +98,7 @@ messenger.dispatch('sayHello', { name: 'Bob' })
 Adds more actions to the messenger at runtime.
 
 ```ts
-messenger.subscribe({ logout: () => console.log('Logging out...') })
+msg.subscribe({ logout: () => console.log('Logging out...') })
 ```
 
 ---

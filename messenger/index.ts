@@ -1,5 +1,5 @@
 
-export const Messenger = ({ 
+export const messenger = ({ 
 	
 	target  = null as any,  
 	accept  = [] as any, 
