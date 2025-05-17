@@ -1,1 +1,1 @@
-export { default as Store } from '@javiani/onijs/src/index'
+export { default as Store } from '@javiani/onijs'
