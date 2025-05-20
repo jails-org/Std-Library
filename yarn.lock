@@ -264,10 +264,10 @@
     wrap-ansi "^8.1.0"
     wrap-ansi-cjs "npm:wrap-ansi@^7.0.0"
 
-"@javiani/onijs@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@javiani/onijs/-/onijs-1.0.2.tgz#6cb33acfa80aefe2ff6225c048516254a299f4fe"
-  integrity sha512-pav/iaxHtVZ0p0XqZanYpyhI3B8ihr474rvWYd6N6wOujZMC5K1CXHAMLq9VZ3EzPb71b05ZIG2kWJYfkOHcZA==
+"@javiani/onijs@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@javiani/onijs/-/onijs-1.0.4.tgz#a4b9fd6b2564be39ad26a8a147ada4ebf9c44b9f"
+  integrity sha512-JqES68lxuQ4UukrZDzVCnOHgfTNOaNuGiVOBtw8+LmWEhPZDHlk+JqXN1485zQzRDmpwPktbtHDQM1IOCmVigQ==
   dependencies:
     react "^19.1.0"
     vite "^6.3.5"
