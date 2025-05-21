@@ -15,7 +15,7 @@ export const mfe = ({ timeout =  5000 } = {}) => {
 				script.src = src 
 				script.async = true 
 				script.onload = () => resolve( target )
-				script.onerror = (e) => reject({
+				script.onerror = (e:Event) => reject({
 					type: 'error',
 					message: `[mfe] - ${e.type} loading script`
 				})
@@ -92,7 +92,7 @@ export const mfe = ({ timeout =  5000 } = {}) => {
 							if( script.text ) {
 								s.text = script.text 
 								document.head.appendChild(s)
-								resolve()
+								resolve(script)
 								return 
 							}
 							

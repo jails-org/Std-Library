@@ -9,7 +9,7 @@
 export const thirdParty = ( name:string ) : Promise<HTMLScriptElement> => {
 
 	return new Promise((resolve, reject) => {
-		const script = document.querySelector(`script[data-name=${name}]`)
+		const script = document.querySelector<HTMLScriptElement>(`script[data-name=${name}]`)
 		if (!script) {
 			reject({ error: 'ThirdPartyScriptError', message: `There is no script with data-name: ${name} in the document.` })
 		} else {

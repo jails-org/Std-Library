@@ -43,7 +43,7 @@ export default function formValidation({
 
 	const getInitialValues = () => {
 		const fields_ = {}
-		fields.forEach((name) => (fields_[name] = ''))
+		fields.forEach((name:string) => (fields_[name] = ''))
 		return fields_
 	}
 
@@ -192,7 +192,7 @@ const getValueOfField = (field, form) => {
 const getFields = (form) => {
 	const list = new Set()
 	Array.from(form.elements)
-		.filter((field) => field.name)
-		.forEach((field) => list.add(field.name))
+		.filter((field:any) => field.name)
+		.forEach((field:any) => list.add(field.name))
 	return list
 }
