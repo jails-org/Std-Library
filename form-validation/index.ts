@@ -192,7 +192,7 @@ const getValueOfField = (field, form) => {
 const getFields = (form) => {
 	const list = new Set()
 	Array.from(form.elements)
-		.filter((field:any) => field.name)
+		.filter((field:any) => field.name && field.dataset.validation)
 		.forEach((field:any) => list.add(field.name))
 	return list
 }
