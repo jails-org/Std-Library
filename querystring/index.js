@@ -1,4 +1,9 @@
-const e = (r) => new URLSearchParams(location.search).get(r);
+const n = () => {
+  const r = new URLSearchParams(location.search), o = {};
+  for (const [a, e] of r)
+    o[a] = e;
+  return o;
+};
 export {
-  e as querystring
+  n as querystring
 };

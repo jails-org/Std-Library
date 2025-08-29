@@ -1,1 +1,1 @@
-export declare const querystring: (variable: any) => string;
+export declare const querystring: () => {};

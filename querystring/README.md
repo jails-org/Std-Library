@@ -12,9 +12,8 @@ Returns a query string value.
 import { querystring } from 'jails.std/querystring'
 
 // https://my-awesome-site.com?search=david
-const search = querystring('search') 
-
-//Results: 'david'
+const { search } = querystring()
+console.log( search ) // 'david'
 
 ```
 

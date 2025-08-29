@@ -1,5 +1,9 @@
 
-export const querystring = ( variable ) => {
+export const querystring = () => {
 	const params = new URLSearchParams( location.search )
-	return params.get( variable )
+	const obj = {}
+	for(const [ key, value] of params ) {
+		obj[key] = value
+	}
+	return obj
 }
