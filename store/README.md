@@ -18,8 +18,7 @@ const initialState = {
     items: []
 }
 
-const actions = {
-    
+export const store = Store(initialState, {
     FETCH: (state, payload, { dispatch }) => {
         
         fetch('/some/async/service')
@@ -37,7 +36,5 @@ const actions = {
             loading: false
         }
     }
-}
-
-export const store = Store(initialState, actions)
+})
 ```
