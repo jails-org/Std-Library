@@ -1,6 +1,7 @@
 # store
 
 Oni, A state machine Store that ressembles Redux but simpler.
+<br />
 Documentation: [Oni](https://github.com/Javiani/Oni)
 
 ```ts
@@ -18,8 +19,10 @@ const initialState = {
     items: []
 }
 
-const actions = {
-    
+export const store = Store( initialState, {
+
+    //@Actions
+
     FETCH: (state, payload, { dispatch }) => {
         
         fetch('/some/async/service')
@@ -37,7 +40,5 @@ const actions = {
             loading: false
         }
     }
-}
-
-export const store = Store(initialState, actions)
+})
 ```
