@@ -3,7 +3,7 @@ function d(h) {
 }
 var v = { exports: {} }, S = v.exports, m;
 function E() {
-  return m || (m = 1, function(h, b) {
+  return m || (m = 1, (function(h, b) {
     (function(n) {
       function s(e) {
         var t = this;
@@ -77,11 +77,11 @@ function E() {
           return t.options.mode === "pushState" ? n.history.pushState({}, null, t.options.root || "/") : n.location && (n.location.hash = t.options.hashBang ? "!" : ""), t;
       }, s.listen = function() {
         var e, t;
-        return arguments[0] && arguments[1] ? (e = arguments[0], t = arguments[1]) : t = arguments[0], function() {
+        return arguments[0] && arguments[1] ? (e = arguments[0], t = arguments[1]) : t = arguments[0], (function() {
           for (var r in t)
             this.add.call(this, r, t[r]);
           return this;
-        }.call(new s(e || {}));
+        }).call(new s(e || {}));
       };
       function p(e, t) {
         this.stack = p.global.slice(0), this.router = e, this.runCallback = !0, this.callbackRan = !1, this.propagateEvent = !0, this.value = e.path();
@@ -125,7 +125,7 @@ function E() {
         return n.define.amd.grapnel = !0, s;
       }) : h.exports = s;
     }).call({}, typeof window == "object" ? window : S);
-  }(v)), v.exports;
+  })(v)), v.exports;
 }
 var _ = E();
 const w = /* @__PURE__ */ d(_), x = w;

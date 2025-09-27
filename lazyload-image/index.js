@@ -49,19 +49,19 @@ const _ = typeof window != "undefined", S = _ && !("onscroll" in window) || type
 }, A = [r], se = [r, U], f = [r, O, C], ae = [q], y = (e) => !!e[p], le = (e) => e[p], oe = (e) => delete e[p], b = (e, t) => {
   if (y(e)) return;
   const n = {};
-  t.forEach((s) => {
+  t.forEach(((s) => {
     n[s] = e.getAttribute(s);
-  }), e[p] = n;
+  })), e[p] = n;
 }, Ce = (e) => {
   y(e) || (e[p] = { backgroundImage: e.style.backgroundImage });
 }, g = (e, t) => {
   if (!y(e)) return;
   const n = le(e);
-  t.forEach((s) => {
+  t.forEach(((s) => {
     ((a, l, i) => {
       i ? a.setAttribute(l, i) : a.removeAttribute(l);
     })(e, s, n[s]);
-  });
+  }));
 }, Me = (e) => {
   if (!y(e)) return;
   const t = le(e);
@@ -75,15 +75,15 @@ const _ = typeof window != "undefined", S = _ && !("onscroll" in window) || type
 }, V = (e, t) => {
   d(e, C, o(e, t.data_sizes)), d(e, O, o(e, t.data_srcset)), d(e, r, o(e, t.data_src));
 }, ze = (e, t) => {
-  D(e, (n) => {
+  D(e, ((n) => {
     b(n, f), V(n, t);
-  }), b(e, f), V(e, t);
+  })), b(e, f), V(e, t);
 }, Ne = (e, t) => {
   b(e, A), d(e, r, o(e, t.data_src));
 }, Re = (e, t) => {
-  ne(e, (n) => {
+  ne(e, ((n) => {
     b(n, A), d(n, r, o(n, t.data_src));
-  }), b(e, se), d(e, U, o(e, t.data_poster)), d(e, r, o(e, t.data_src)), e.load();
+  })), b(e, se), d(e, U, o(e, t.data_poster)), d(e, r, o(e, t.data_src)), e.load();
 }, Te = (e, t) => {
   b(e, ae), d(e, q, o(e, t.data_src));
 }, De = (e, t, n) => {
@@ -95,7 +95,7 @@ const _ = typeof window != "undefined", S = _ && !("onscroll" in window) || type
 }, He = (e, t, n) => {
   const s = o(e, t.data_bg_set);
   if (!s) return;
-  let a = s.split("|").map((l) => `image-set(${l})`);
+  let a = s.split("|").map(((l) => `image-set(${l})`));
   e.style.backgroundImage = a.join(), ce(e, t, n);
 }, ie = { IMG: ze, IFRAME: Ne, VIDEO: Re, OBJECT: Te }, Ve = (e, t) => {
   const n = ie[e.tagName];
@@ -131,11 +131,11 @@ const _ = typeof window != "undefined", S = _ && !("onscroll" in window) || type
   _e(t, n, s), h(t, n.class_error), $(t, z), u(n.callback_error, t, s), n.restore_on_error && g(t, f), a || de(n, s);
 }, w = (e, t, n) => {
   const s = Z(e) || e;
-  G(s) || Je(s, (a) => {
+  G(s) || Je(s, ((a) => {
     Pe(0, e, t, n), L(s);
-  }, (a) => {
+  }), ((a) => {
     Ue(0, e, t, n), L(s);
-  });
+  }));
 }, x = (e, t, n) => {
   Fe(e) ? ((s, a, l) => {
     w(s, a, l), je(s, a, l);
@@ -147,17 +147,17 @@ const _ = typeof window != "undefined", S = _ && !("onscroll" in window) || type
 }, B = (e) => {
   e.removeAttribute(r), e.removeAttribute(O), e.removeAttribute(C);
 }, Ke = (e) => {
-  D(e, (t) => {
+  D(e, ((t) => {
     B(t);
-  }), B(e);
+  })), B(e);
 }, ue = (e) => {
-  D(e, (t) => {
+  D(e, ((t) => {
     g(t, f);
-  }), g(e, f);
+  })), g(e, f);
 }, Qe = (e) => {
-  ne(e, (t) => {
+  ne(e, ((t) => {
     g(t, A);
-  }), g(e, se), e.load();
+  })), g(e, se), e.load();
 }, We = (e) => {
   g(e, A);
 }, Xe = (e) => {
@@ -177,25 +177,25 @@ const _ = typeof window != "undefined", S = _ && !("onscroll" in window) || type
 }, nt = (e, t, n, s) => {
   N(e) || (h(e, n.class_exited), et(e, t, n, s), u(n.callback_exit, e, t, s));
 }, st = ["IMG", "IFRAME", "VIDEO"], ge = (e) => e.use_native && "loading" in HTMLImageElement.prototype, at = (e, t, n) => {
-  e.forEach((s) => {
+  e.forEach(((s) => {
     st.indexOf(s.tagName) !== -1 && qe(s, t, n);
-  }), ee(n, 0);
+  })), ee(n, 0);
 }, lt = (e) => e.isIntersecting || e.intersectionRatio > 0, ot = (e, t) => {
-  t.forEach((n) => {
+  t.forEach(((n) => {
     e.observe(n);
-  });
+  }));
 }, ct = (e, t) => {
   ye(e), ot(e, t);
 }, rt = (e, t) => {
-  ge(e) || (t._observer = new IntersectionObserver((n) => {
+  ge(e) || (t._observer = new IntersectionObserver(((n) => {
     ((s, a, l) => {
-      s.forEach((i) => lt(i) ? tt(i.target, i, a, l) : nt(i.target, i, a, l));
+      s.forEach(((i) => lt(i) ? tt(i.target, i, a, l) : nt(i.target, i, a, l)));
     })(n, e, t);
-  }, ((n) => ({ root: n.container === document ? null : n.container, rootMargin: n.thresholds || n.threshold + "px" }))(e)));
+  }), ((n) => ({ root: n.container === document ? null : n.container, rootMargin: n.thresholds || n.threshold + "px" }))(e)));
 }, $e = (e) => Array.prototype.slice.call(e), E = (e) => e.container.querySelectorAll(e.elements_selector), it = (e) => $e(e).filter(N), dt = (e) => ve(e), _t = (e) => $e(e).filter(dt), F = (e, t) => it(e || E(t)), ut = (e, t) => {
-  _t(E(e)).forEach((n) => {
+  _t(E(e)).forEach(((n) => {
     c(n, e.class_error), I(n);
-  }), t.update();
+  })), t.update();
 }, gt = (e, t) => {
   _ && (t._onlineHandler = () => {
     ut(e, t);
@@ -210,19 +210,19 @@ m.prototype = { update: function(e) {
   const t = this._settings, n = F(e, t);
   ee(this, n.length), S ? this.loadAll(n) : ge(t) ? at(n, t, this) : ct(this._observer, n);
 }, destroy: function() {
-  this._observer && this._observer.disconnect(), $t(this), E(this._settings).forEach((e) => {
+  this._observer && this._observer.disconnect(), $t(this), E(this._settings).forEach(((e) => {
     oe(e);
-  }), delete this._observer, delete this._settings, delete this._onlineHandler, delete this.loadingCount, delete this.toLoadCount;
+  })), delete this._observer, delete this._settings, delete this._onlineHandler, delete this.loadingCount, delete this.toLoadCount;
 }, loadAll: function(e) {
   const t = this._settings;
-  F(e, t).forEach((n) => {
+  F(e, t).forEach(((n) => {
     k(n, this), x(n, t, this);
-  });
+  }));
 }, restoreAll: function() {
   const e = this._settings;
-  E(e).forEach((t) => {
+  E(e).forEach(((t) => {
     Ze(t, e);
-  });
+  }));
 } }, m.load = (e, t) => {
   const n = P(t);
   x(e, n);

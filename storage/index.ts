@@ -7,12 +7,12 @@ export const storage = {
 			return data
 		},
 	
-		get( name: string ){
+		get( name: string ): any {
 			let value = localStorage.getItem( name )
 			// This way I can distinguish what is a string and what is an object serialized.
 			try{ value = JSON.parse( value ) }
 			catch(e){ /* Noop */}
-			return value
+			return null
 		},
 	
 		remove( name: string ){
@@ -28,7 +28,7 @@ export const storage = {
 			return data
 		},
 	
-		get( name: string ){
+		get( name: string ): any {
 			let value = sessionStorage.getItem( name )
 			// This way I can distinguish what is a string and what is an object serialized.
 			try{ value = JSON.parse( value ) }

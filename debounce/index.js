@@ -1,11 +1,11 @@
-const r = (t, n = 250) => {
+const i = (t, o = 250) => {
   let e;
-  return (...o) => {
+  return (...r) => {
     clearTimeout(e), e = setTimeout(() => {
-      t.apply(void 0, o);
-    }, n);
+      t.apply(void 0, r);
+    }, o);
   };
 };
 export {
-  r as debounce
+  i as debounce
 };

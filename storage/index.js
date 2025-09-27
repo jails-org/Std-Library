@@ -9,7 +9,7 @@ const s = {
         e = JSON.parse(e);
       } catch (r) {
       }
-      return e;
+      return null;
     },
     remove(t) {
       let e = this.get(t);

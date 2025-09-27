@@ -85,7 +85,7 @@ const P = ({ timeout: n = 5e3 } = {}) => {
       });
     }
   };
-}, k = (n = {}) => window.___Shell___ ? (window.___Shell___ = p(p({}, n), window.___Shell___), window.___Shell___) : (window.___Shell___ = p({}, n), window.___Shell___), M = (n) => w(void 0, null, function* () {
+}, k = (n = {}) => window.___Shell___ ? (window.___Shell___ = p(p({}, n), window.___Shell___), window.___Shell___) : (window.___Shell___ = p({}, n), window.___Shell___), M = (n) => w(null, null, function* () {
   const e = [];
   for (const t of n) {
     const l = yield t();
