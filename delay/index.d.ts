@@ -1,1 +1,1 @@
-export declare const delay: (milisseconds?: number) => (data?: any) => Promise<unknown>;
+export declare const delay: (milisseconds?: number) => (data?: any) => any;
