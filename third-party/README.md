@@ -28,7 +28,7 @@ The `thirdParty` will execute the text script code and then will load the cdn li
 This way you can have the control of third party code execution and when it should be executed inside your application flow.
 
 ```js
-import { thirdParty } from 'jails.std/third-party'
+import { thirdParty } from 'jails.stdlib/third-party'
 
 export const analytics = thirdParty('analytics')
 

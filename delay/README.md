@@ -8,7 +8,7 @@ Delays the next `.then` promise chain.
 ### Usage
 
 ```js
-import { delay } from 'jails.std/delay'
+import { delay } from 'jails.stdlib/delay'
 
 fetch('https://jsonplaceholder.typicode.com/todos/1')
   .then( response => response.json() )

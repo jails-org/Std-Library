@@ -11,7 +11,7 @@ Documentation : https://github.com/baseprime/grapnel
 ## Usage
 
 ```js
-import { Router } from 'jails.std/router'
+import { Router } from 'jails.stdlib/router'
 
 const router = new Router()
 

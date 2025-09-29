@@ -43,7 +43,7 @@ on('form-validation:error', ({ errors }) => {})
 
 ##### main.ts
 ```ts
-import * as formValidation from 'jails.std/form-validation'
+import * as formValidation from 'jails.stdlib/form-validation'
 import rules from './my-custom-rules'
 
 jails.register('form-validation', formValidation, { ...rules })

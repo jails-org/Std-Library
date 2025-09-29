@@ -10,7 +10,7 @@ Returns a promise when script is loaded
 ### Usage 
 
 ```ts 
-import { importJs } from 'jails.std/import-js'
+import { importJs } from 'jails.stdlib/import-js'
 
 importJs('https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js')
   .then( (event) => {

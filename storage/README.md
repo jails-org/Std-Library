@@ -8,7 +8,7 @@ The storage is a wrapper for the localStorage and sessionStorage global objects.
 ### For local storage
 
 ```js
-import { storage } from 'jails.std/storage'
+import { storage } from 'jails.stdlib/storage'
 
 //Save data
 storage.local.set('item', { my :'item' }); // Save data and return { my:'item' }

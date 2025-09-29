@@ -10,7 +10,7 @@ Returns a promise when Css is loaded
 ### Usage 
 
 ```ts 
-import { importCss } from 'jails.std/import-css'
+import { importCss } from 'jails.stdlib/import-css'
 
 importCss('https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css')
   .then( (event) => {

@@ -9,7 +9,7 @@ Returns a query string value.
 ### Usage
 
 ```js
-import { querystring } from 'jails.std/querystring'
+import { querystring } from 'jails.stdlib/querystring'
 
 // https://my-awesome-site.com?search=david
 const { search } = querystring()

@@ -14,7 +14,7 @@ It can embed a full html, css, js from an external url.
 
 ```ts 
 
-import { mfe } from 'jails.std/mfe'
+import { mfe } from 'jails.stdlib/mfe'
 
 function main () {
 
@@ -34,7 +34,7 @@ It can also embed a single page app from a external `.js` file.
 
 ```ts 
 
-import { mfe } from 'jails.std/mfe'
+import { mfe } from 'jails.stdlib/mfe'
 
 function main () {
 
@@ -63,7 +63,7 @@ Example:
 `main.ts`
 
 ```ts
-import { Shell } from 'jails.std/mfe'
+import { Shell } from 'jails.stdlib/mfe'
 
 export const shell = Shell({
   somevariable,
@@ -79,7 +79,7 @@ export const shell = Shell({
 `main.ts`
 
 ```ts 
-import { Shell } from 'jails.std/mfe'
+import { Shell } from 'jails.stdlib/mfe'
 
 export const shell = Shell({
   somevariable,

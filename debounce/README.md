@@ -10,7 +10,7 @@ Delays a function's execution until after a specified pause in activity.
 ### Usage
 
 ```js
-import { debounce } from 'jails.std/debounce'
+import { debounce } from 'jails.stdlib/debounce'
 
 const oninput = debounce(() => {
   console.log('debouncing input')

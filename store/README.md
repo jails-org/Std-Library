@@ -12,7 +12,7 @@ Store( initialState: Object , actions: Object )
 ## Usage
 
 ```js
-import { Store } from 'jails.std/store'
+import { Store } from 'jails.stdlib/store'
 
 const initialState = {
     loading: false,

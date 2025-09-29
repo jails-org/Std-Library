@@ -9,7 +9,7 @@ Limits a function's execution to at most once per specified time interval.
 ### Usage
 
 ```js
-import { throttle } from 'jails.std/throttle'
+import { throttle } from 'jails.stdlib/throttle'
 
 const onscroll = throttle(() => {
   console.log('throttling scroll')

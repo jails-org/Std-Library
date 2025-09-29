@@ -17,7 +17,7 @@ render( url: string ) : Promise<target: HTMLElement>
 ```
 
 ```ts
-import { Oultet } from 'jails.std/outlet'
+import { Oultet } from 'jails.stdlib/outlet'
 
 const target = document.querySelector('[data-outlet]')
 const outlet = Outlet({ target })

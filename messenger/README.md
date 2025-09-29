@@ -28,7 +28,7 @@ The `messenger` utility provides a lightweight, secure interface for sending and
 ### Parent Page
 
 ```ts
-import { messenger } from 'jails.std/messenger'
+import { messenger } from 'jails.stdlib/messenger'
 
 const msg = messenger({
   target: document.getElementById('myIframe'), // <iframe id="myIframe" />

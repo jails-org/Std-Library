@@ -11,7 +11,7 @@ It also wraps it in `Promise` so it can be used with `await` for more convinienc
 ### Usage
 
 ```js
-import { isVisible } from 'jails.std/is-visible'
+import { isVisible } from 'jails.stdlib/is-visible'
 
 async function main () {
 

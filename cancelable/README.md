@@ -10,7 +10,7 @@ TIt ensures only the latest async call resolves, ignoring all previous ones, so 
 ### Usage
 
 ```js
-import { cancelable } from 'jails.std/cancelable'
+import { cancelable } from 'jails.stdlib/cancelable'
 
 export const getService = () => {
 	return new Promise((resolve, reject) => {
