@@ -1,6 +1,6 @@
 
 <div align="center">
-    <h1>jails.std</h1>
+    <h1>jails.stdlib</h1>
     <h4>The Jails Standard Library</h4>
 </div>
 
@@ -9,12 +9,12 @@
 ## Installing
 
 ```
-npm install jails.std
+npm install jails.stdlib
 ```
 or
 
 ```
-yarn add jails.std
+yarn add jails.stdlib
 ```
 
 <br />
