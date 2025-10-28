@@ -31,6 +31,10 @@ export default function formValidation({
 		initialValues()
 	})
 
+	elm.setValues = ( values ) => {
+		state.set(s => (s.form.values = { ...s.form.values, ...values }))
+	}
+
 	const initialValues = () => {
 		if (!validations) {
 			throw new Error(

@@ -115,3 +115,23 @@ export default {
 ```
  
 To see how to inject this dependency, go back to the [usage](#usage) section.
+
+
+##### element.setValues(...data)
+
+If you want to set programatically values to the fields, you just have to get the node of `form-validation` element and use the public method `setValues()` passing data with `name` and `value` pairs.
+
+
+```ts
+export default function myComponent({ main, elm }) {
+
+    const formValidation = elm.querySelector('form-validation') 
+
+    main(() => {
+        formValidation.setValues({
+            'username': 'John Doe',
+            'age': '41'
+        })
+    })
+}
+```
