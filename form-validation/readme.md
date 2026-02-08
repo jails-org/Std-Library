@@ -44,9 +44,9 @@ on('form-validation:error', ({ errors }) => {})
 ##### main.ts
 ```ts
 import * as formValidation from 'jails.stdlib/form-validation'
-import rules from './my-custom-rules'
+import * as entities from './my-entities'
 
-jails.register('form-validation', formValidation, { ...rules })
+jails.register('form-validation', formValidation, { ...entities })
 jails.start()
 ```
 
@@ -84,37 +84,62 @@ jails.start()
 ```
 
 ##### my-custom-rules/index.ts
-```ts
-export default {
-    
-    validations : {
-        
-        required(value, input, form) {
-            if (!value) return { ok: false, message: 'This field is required'}
-            return { ok: true }
-        },
-    
-        email(value, input, form) {
-            if (!value) return { ok: true }
-            if (!value.match(/(.*)@(.*)\.\w{2,}/)) return { ok: false, message: 'Invalid email' }
-            return { ok: true }
-        },
-    
-        number(value, input, form) {
-            if (value.match(/\D/g)) return { ok: false, message:'This field takes only number' }
-            return { ok: true }
-        }
-    },
+You need to provide a map of entities that will be used to validate the kind of your form fields.
+They all need to implement: `validate()`, `message()`. Optional: `mask()`.
 
-    masks: {
-        number(value, input, form) {
-            return value.replace(/\D/, '')
-        }
+##### Example
+
+```ts
+import * as formValidation from 'jails.stdlib/form-validation'
+import { email, number, required } from './my-entities'
+
+jails.register('form-validation', formValidation, { email, number, required })
+jails.start()
+```
+
+**./my-entities.ts**
+
+```ts
+export const email = {
+    validate( value, input, form ) {
+       if (!value) return true
+       if (!value.match(/(.*)@(.*)\.\w{2,}/)) return false
+       return true
+    },
+    mask() {
+        // I don't have a mask
+    },
+    message( value, input, form ) {
+        return `Invalid Email`
+    }
+}
+
+export const required = {
+    validate(value, input, form) {
+        if (!value) return false
+        return true 
+    },
+    mask(value, input, form) {
+        // I don't have a mask
+    },
+    message(value, input, form) {
+        return `This field is required`
+    }
+}
+
+export const number = {
+    validate(value, input, form) {
+        if (value.match(/\D/g)) return false
+        return true 
+    },
+    mask(value, input, form) {
+        return value.replace(/\D/, '')
+    },
+    message() {
+       return `This field accepts only number` 
     }
 }
 ```
- 
-To see how to inject this dependency, go back to the [usage](#usage) section.
 
 
 ##### element.setValues(...data)

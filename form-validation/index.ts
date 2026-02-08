@@ -12,7 +12,7 @@ export default function formValidation({
 	trigger,
 }) {
 	//
-	const { validations, masks } = dependencies
+	const { ...entities } = dependencies
 	const form = elm.querySelector('input,select,textarea')?.form
 	let fields = getFields(form)
 
@@ -36,9 +36,9 @@ export default function formValidation({
 	}
 
 	const initialValues = () => {
-		if (!validations) {
+		if (!entities) {
 			throw new Error(
-				'<form-validation> - No validations provided in dependencies'
+				'<form-validation> - No entities provided in dependencies'
 			)
 		}
 		const fields = getInitialValues()
@@ -75,13 +75,11 @@ export default function formValidation({
 		const currentState = state.get()
 
 		validationList.forEach((validation) => {
-			if (validation in validations) {
-				const { ok, message } = validations[validation](
-					value,
-					input,
-					form
-				)
+			if (validation in entities) {
+				const entity = entities[validation]
+				const ok = entity.validate( value, input, form )
 				if (!ok) {
+					const message = entity.message( value, input, form)
 					errorsList.push(message)
 				}
 			}
@@ -145,8 +143,8 @@ export default function formValidation({
 		const allMasks = mask.split(/s/)
 
 		allMasks.forEach((mask) => {
-			if (mask && mask in masks) {
-				const fn = masks[mask]
+			if (entities[mask] && entities[mask].mask) {
+				const fn = entities[mask].mask
 				value = fn(value, e.target, e.target.form)
 			}
 		})

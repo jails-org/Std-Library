@@ -1,96 +1,104 @@
-var T = Object.defineProperty, B = Object.defineProperties;
-var C = Object.getOwnPropertyDescriptors;
-var D = Object.getOwnPropertySymbols;
-var G = Object.prototype.hasOwnProperty, H = Object.prototype.propertyIsEnumerable;
-var A = (a, r, e) => r in a ? T(a, r, { enumerable: !0, configurable: !0, writable: !0, value: e }) : a[r] = e, m = (a, r) => {
+var C = Object.defineProperty, G = Object.defineProperties;
+var H = Object.getOwnPropertyDescriptors;
+var h = Object.getOwnPropertySymbols;
+var L = Object.prototype.hasOwnProperty, M = Object.prototype.propertyIsEnumerable;
+var A = (t, r, e) => r in t ? C(t, r, { enumerable: !0, configurable: !0, writable: !0, value: e }) : t[r] = e, v = (t, r) => {
   for (var e in r || (r = {}))
-    G.call(r, e) && A(a, e, r[e]);
-  if (D)
-    for (var e of D(r))
-      H.call(r, e) && A(a, e, r[e]);
-  return a;
-}, L = (a, r) => B(a, C(r));
-const M = "form-validation", g = "[data-validation]", J = "[data-mask]";
-function U({
-  main: a,
+    L.call(r, e) && A(t, e, r[e]);
+  if (h)
+    for (var e of h(r))
+      M.call(r, e) && A(t, e, r[e]);
+  return t;
+}, w = (t, r) => G(t, H(r));
+var y = (t, r) => {
+  var e = {};
+  for (var a in t)
+    L.call(t, a) && r.indexOf(a) < 0 && (e[a] = t[a]);
+  if (t != null && h)
+    for (var a of h(t))
+      r.indexOf(a) < 0 && M.call(t, a) && (e[a] = t[a]);
+  return e;
+};
+const S = "form-validation", p = "[data-validation]", J = "[data-mask]";
+function W({
+  main: t,
   elm: r,
   state: e,
-  on: n,
-  emit: v,
-  dependencies: y,
-  trigger: F
+  on: a,
+  emit: g,
+  dependencies: N,
+  trigger: O
 }) {
-  var k;
-  const { validations: h, masks: E } = y, f = (k = r.querySelector("input,select,textarea")) == null ? void 0 : k.form;
-  let u = S(f);
-  a((t) => {
-    n("input", "input, textarea, select", z), n("input", J, $), n("input", g, p("input")), n("change", g, p("change")), n("blur", g, p("blur")), n("focus", "input, textarea, select", N), n("blur", "input, textarea, select", O), f.addEventListener("reset", j), f.addEventListener("submit", _), I();
-  }), r.setValues = (t) => {
-    e.set((s) => s.form.values = m(m({}, s.form.values), t));
+  var V;
+  const u = y(N, []), f = (V = r.querySelector("input,select,textarea")) == null ? void 0 : V.form;
+  let m = I(f);
+  t((s) => {
+    a("input", "input, textarea, select", j), a("input", J, K), a("input", p, b("input")), a("change", p, b("change")), a("blur", p, b("blur")), a("focus", "input, textarea, select", _), a("blur", "input, textarea, select", $), f.addEventListener("reset", T), f.addEventListener("submit", q), z();
+  }), r.setValues = (s) => {
+    e.set((o) => o.form.values = v(v({}, o.form.values), s));
   };
-  const I = () => {
-    if (!h)
+  const z = () => {
+    if (!u)
       throw new Error(
-        "<form-validation> - No validations provided in dependencies"
+        "<form-validation> - No entities provided in dependencies"
       );
-    const t = V();
-    e.set((s) => s.form.values = t);
-  }, V = () => {
-    const t = {};
-    return u.forEach((s) => t[s] = ""), t;
-  }, N = (t) => {
-    const s = t.target.name;
-    e.set((o) => {
-      o.form.touched[s] = !0, o.form.focused[s] = !0;
+    const s = E();
+    e.set((o) => o.form.values = s);
+  }, E = () => {
+    const s = {};
+    return m.forEach((o) => s[o] = ""), s;
+  }, _ = (s) => {
+    const o = s.target.name;
+    e.set((n) => {
+      n.form.touched[o] = !0, n.form.focused[o] = !0;
     });
-  }, O = (t) => {
-    const s = t.target.name;
-    e.set((o) => {
-      o.form.focused[s] = !1;
+  }, $ = (s) => {
+    const o = s.target.name;
+    e.set((n) => {
+      n.form.focused[o] = !1;
     });
-  }, p = (t) => (s) => {
-    const o = s.target, i = o.name, c = w(o, f), b = o.dataset.validation.split(/\s/), d = [], x = e.get();
-    b.forEach((l) => {
-      if (l in h) {
-        const { ok: q, message: K } = h[l](
-          c,
-          o,
-          f
-        );
-        q || d.push(K);
+  }, b = (s) => (o) => {
+    const n = o.target, c = n.name, l = F(n, f), k = n.dataset.validation.split(/\s/), d = [], x = e.get();
+    k.forEach((i) => {
+      if (i in u) {
+        const D = u[i];
+        if (!D.validate(l, n, f)) {
+          const B = D.message(l, n, f);
+          d.push(B);
+        }
       }
-    }), d.length ? t === "input" ? (u.add(o.name), e.set((l) => {
-      l.form.isValid = !1, x.form.errors[i] && d[0] != x.form.errors[i] && (l.form.errors[i] = d[0]);
-    })) : (t === "blur" || t === "change") && (u.add(o.name), e.set((l) => {
-      l.form.errors[i] = d[0], l.form.isValid = !1;
-    })) : (u.delete(o.name), e.set((l) => {
-      delete l.form.errors[i], u.size || (l.form.isValid = !0);
+    }), d.length ? s === "input" ? (m.add(n.name), e.set((i) => {
+      i.form.isValid = !1, x.form.errors[c] && d[0] != x.form.errors[c] && (i.form.errors[c] = d[0]);
+    })) : (s === "blur" || s === "change") && (m.add(n.name), e.set((i) => {
+      i.form.errors[c] = d[0], i.form.isValid = !1;
+    })) : (m.delete(n.name), e.set((i) => {
+      delete i.form.errors[c], m.size || (i.form.isValid = !0);
     }));
-  }, z = (t) => {
-    const { name: s } = t.target, o = w(t.target, f);
-    e.set((i) => i.form.values[s] = o);
-  }, _ = (t) => {
-    t.preventDefault(), F("blur", g);
-    const o = e.get().form.errors;
-    if (Object.keys(o).length)
-      v(`${M}:error`, { errors: o });
+  }, j = (s) => {
+    const { name: o } = s.target, n = F(s.target, f);
+    e.set((c) => c.form.values[o] = n);
+  }, q = (s) => {
+    s.preventDefault(), O("blur", p);
+    const n = e.get().form.errors;
+    if (Object.keys(n).length)
+      g(`${S}:error`, { errors: n });
     else {
-      const c = Q(t.target);
-      v(`${M}:submit`, m({}, c));
+      const l = Q(s.target);
+      g(`${S}:submit`, v({}, l));
     }
-  }, $ = (t) => {
-    let s = t.target.value;
-    const { mask: o } = t.target.dataset;
-    o.split(/s/).forEach((c) => {
-      if (c && c in E) {
-        const b = E[c];
-        s = b(s, t.target, t.target.form);
+  }, K = (s) => {
+    let o = s.target.value;
+    const { mask: n } = s.target.dataset;
+    n.split(/s/).forEach((l) => {
+      if (u[l] && u[l].mask) {
+        const k = u[l].mask;
+        o = k(o, s.target, s.target.form);
       }
-    }), e.set((c) => c.form.values[t.target.name] = s || "");
-  }, j = () => {
-    u = S(f), e.set({
-      form: L(m({}, P.form), {
-        values: V()
+    }), e.set((l) => l.form.values[s.target.name] = o || "");
+  }, T = () => {
+    m = I(f), e.set({
+      form: w(v({}, P.form), {
+        values: E()
       })
     });
   };
@@ -103,19 +111,19 @@ const P = {
     isValid: !1,
     focused: {}
   }
-}, Q = (a) => {
-  const r = new FormData(a), e = {};
-  for (let [n, v] of r)
-    e[n] = v;
+}, Q = (t) => {
+  const r = new FormData(t), e = {};
+  for (let [a, g] of r)
+    e[a] = g;
   return { formData: r, data: e };
-}, w = (a, r) => {
-  const { name: e, type: n } = a;
-  return n == "checkbox" ? a.checked ? a.value : "" : r[e].value;
-}, S = (a) => {
+}, F = (t, r) => {
+  const { name: e, type: a } = t;
+  return a == "checkbox" ? t.checked ? t.value : "" : r[e].value;
+}, I = (t) => {
   const r = /* @__PURE__ */ new Set();
-  return Array.from(a.elements).filter((e) => e.name && e.dataset.validation).forEach((e) => r.add(e.name)), r;
+  return Array.from(t.elements).filter((e) => e.name && e.dataset.validation).forEach((e) => r.add(e.name)), r;
 };
 export {
-  U as default,
+  W as default,
   P as model
 };
