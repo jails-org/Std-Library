@@ -10,7 +10,10 @@ export const storage = {
 		get( name: string ): any {
 			let value = localStorage.getItem( name )
 			// This way I can distinguish what is a string and what is an object serialized.
-			try{ value = JSON.parse( value ) }
+			try{ 
+				value = JSON.parse( value ) 
+				return value
+			}
 			catch(e){ /* Noop */}
 			return null
 		},

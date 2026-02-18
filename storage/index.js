@@ -6,7 +6,7 @@ const s = {
     get(t) {
       let e = localStorage.getItem(t);
       try {
-        e = JSON.parse(e);
+        return e = JSON.parse(e), e;
       } catch (r) {
       }
       return null;
