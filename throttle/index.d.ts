@@ -1,1 +1,1 @@
-export declare const throttle: (fn: Function, wait?: number) => () => void;
+export declare const throttle: (fn: Function, wait?: number) => (...args: any[]) => void;

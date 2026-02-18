@@ -1,9 +1,9 @@
 
 export const throttle = (fn:Function, wait:number = 100) => {
 	let time = Date.now()
-	return () => {
+	return (...args) => {
 		if ((time + wait - Date.now()) < 0) {
-			fn()
+			fn(...args)
 			time = Date.now()
 		}
 	}
