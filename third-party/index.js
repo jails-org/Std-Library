@@ -6,9 +6,11 @@ const thirdParty = (name) => new Promise((resolve, reject) => {
     const e = document.createElement("script");
     e.onload = () => {
       new Function(script.text)(), resolve(e);
-    }, e.src = script.src, document.head.appendChild(e);
+    }, e.async = !0, e.src = script.src, document.head.appendChild(e);
   } else
-    eval(script.text), resolve(script);
+    setTimeout(() => {
+      eval(script.text), resolve(script);
+    });
 });
 export {
   thirdParty

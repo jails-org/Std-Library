@@ -19,11 +19,14 @@ export const thirdParty = ( name:string ) : Promise<HTMLScriptElement> => {
 					;(new Function(script.text))()
 					resolve( newscript )
 				}
+				newscript.async = true
 				newscript.src = script.src
 				document.head.appendChild(newscript)
 			}else {
-				eval(script.text)
-				resolve(script)
+				setTimeout(() => {
+					eval(script.text)
+					resolve(script)
+				})
 			}
 		}
 	})
