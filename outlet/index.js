@@ -1,391 +1,419 @@
-var B = (function() {
-  const h = () => {
-  }, y = {
+var R = (function() {
+  const m = () => {
+  }, T = {
     morphStyle: "outerHTML",
     callbacks: {
-      beforeNodeAdded: h,
-      afterNodeAdded: h,
-      beforeNodeMorphed: h,
-      afterNodeMorphed: h,
-      beforeNodeRemoved: h,
-      afterNodeRemoved: h,
-      beforeAttributeUpdated: h
+      beforeNodeAdded: m,
+      afterNodeAdded: m,
+      beforeNodeMorphed: m,
+      afterNodeMorphed: m,
+      beforeNodeRemoved: m,
+      afterNodeRemoved: m,
+      beforeAttributeUpdated: m
     },
     head: {
       style: "merge",
-      shouldPreserve: (a) => a.getAttribute("im-preserve") === "true",
-      shouldReAppend: (a) => a.getAttribute("im-re-append") === "true",
-      shouldRemove: h,
-      afterHeadMorphed: h
+      shouldPreserve: (c) => c.getAttribute("im-preserve") === "true",
+      shouldReAppend: (c) => c.getAttribute("im-re-append") === "true",
+      shouldRemove: m,
+      afterHeadMorphed: m
     },
     restoreFocus: !0
   };
-  function g(a, m, c = {}) {
-    a = E(a);
-    const d = I(m), f = L(a, d, c), l = b(f, () => T(
-      f,
-      a,
-      d,
-      /** @param {MorphContext} ctx */
-      (r) => r.morphStyle === "innerHTML" ? (S(r, a, d), Array.from(a.childNodes)) : M(r, a, d)
-    ));
-    return f.pantry.remove(), l;
-  }
-  function M(a, m, c) {
-    const d = I(m);
-    return S(
-      a,
-      d,
+  function b(c, g, f = {}) {
+    c = E(c);
+    const p = N(g), h = k(c, p, f), l = v(h, () => H(
+      h,
       c,
-      // these two optional params are the secret sauce
-      m,
-      // start point for iteration
-      m.nextSibling
-      // end point for iteration
-    ), Array.from(d.childNodes);
+      p,
+      /** @param {MorphContext} ctx */
+      (r) => r.morphStyle === "innerHTML" ? (S(r, c, p), Array.from(c.childNodes)) : A(r, c, p)
+    ));
+    return h.pantry.remove(), l;
   }
-  function b(a, m) {
-    var n;
-    if (!a.config.restoreFocus) return m();
-    let c = (
+  function A(c, g, f) {
+    const p = N(g);
+    return S(
+      c,
+      p,
+      f,
+      // these two optional params are the secret sauce
+      g,
+      // start point for iteration
+      g.nextSibling
+      // end point for iteration
+    ), Array.from(p.childNodes);
+  }
+  function v(c, g) {
+    var s;
+    if (!c.config.restoreFocus) return g();
+    let f = (
       /** @type {HTMLInputElement|HTMLTextAreaElement|null} */
       document.activeElement
     );
-    if (!(c instanceof HTMLInputElement || c instanceof HTMLTextAreaElement))
-      return m();
-    const { id: d, selectionStart: f, selectionEnd: l } = c, r = m();
-    return d && d !== ((n = document.activeElement) == null ? void 0 : n.id) && (c = a.target.querySelector(`[id="${d}"]`), c == null || c.focus()), c && !c.selectionEnd && l && c.setSelectionRange(f, l), r;
+    if (!(f instanceof HTMLInputElement || f instanceof HTMLTextAreaElement))
+      return g();
+    const { id: p, selectionStart: h, selectionEnd: l } = f, r = g();
+    return p && p !== ((s = document.activeElement) == null ? void 0 : s.getAttribute("id")) && (f = c.target.querySelector(`[id="${p}"]`), f == null || f.focus()), f && !f.selectionEnd && l && f.setSelectionRange(h, l), r;
   }
   const S = /* @__PURE__ */ (function() {
-    function a(e, t, s, i = null, o = null) {
-      t instanceof HTMLTemplateElement && s instanceof HTMLTemplateElement && (t = t.content, s = s.content), i || (i = t.firstChild);
-      for (const u of s.childNodes) {
+    function c(e, t, n, i = null, o = null) {
+      t instanceof HTMLTemplateElement && n instanceof HTMLTemplateElement && (t = t.content, n = n.content), i || (i = t.firstChild);
+      for (const a of n.childNodes) {
         if (i && i != o) {
-          const p = c(
+          const d = f(
             e,
-            u,
+            a,
             i,
             o
           );
-          if (p) {
-            p !== i && f(e, i, p), H(p, u, e), i = p.nextSibling;
+          if (d) {
+            d !== i && h(e, i, d), L(d, a, e), i = d.nextSibling;
             continue;
           }
         }
-        if (u instanceof Element && e.persistentIds.has(u.id)) {
-          const p = l(
-            t,
-            u.id,
-            i,
-            e
+        if (a instanceof Element) {
+          const d = (
+            /** @type {String} */
+            a.getAttribute("id")
           );
-          H(p, u, e), i = p.nextSibling;
-          continue;
+          if (e.persistentIds.has(d)) {
+            const M = l(
+              t,
+              d,
+              i,
+              e
+            );
+            L(M, a, e), i = M.nextSibling;
+            continue;
+          }
         }
-        const v = m(
+        const u = g(
           t,
-          u,
+          a,
           i,
           e
         );
-        v && (i = v.nextSibling);
+        u && (i = u.nextSibling);
       }
       for (; i && i != o; ) {
-        const u = i;
-        i = i.nextSibling, d(e, u);
+        const a = i;
+        i = i.nextSibling, p(e, a);
       }
     }
-    function m(e, t, s, i) {
+    function g(e, t, n, i) {
       if (i.callbacks.beforeNodeAdded(t) === !1) return null;
       if (i.idMap.has(t)) {
         const o = document.createElement(
           /** @type {Element} */
           t.tagName
         );
-        return e.insertBefore(o, s), H(o, t, i), i.callbacks.afterNodeAdded(o), o;
+        return e.insertBefore(o, n), L(o, t, i), i.callbacks.afterNodeAdded(o), o;
       } else {
         const o = document.importNode(t, !0);
-        return e.insertBefore(o, s), i.callbacks.afterNodeAdded(o), o;
+        return e.insertBefore(o, n), i.callbacks.afterNodeAdded(o), o;
       }
     }
-    const c = /* @__PURE__ */ (function() {
-      function e(i, o, u, v) {
-        let p = null, k = o.nextSibling, R = 0, A = u;
-        for (; A && A != v; ) {
-          if (s(A, o)) {
-            if (t(i, A, o))
-              return A;
-            p === null && (i.idMap.has(A) || (p = A));
+    const f = /* @__PURE__ */ (function() {
+      function e(i, o, a, u) {
+        let d = null, M = o.nextSibling, B = 0, y = a;
+        for (; y && y != u; ) {
+          if (n(y, o)) {
+            if (t(i, y, o))
+              return y;
+            d === null && (i.idMap.has(y) || (d = y));
           }
-          if (p === null && k && s(A, k) && (R++, k = k.nextSibling, R >= 2 && (p = void 0)), A.contains(document.activeElement)) break;
-          A = A.nextSibling;
+          if (d === null && M && n(y, M) && (B++, M = M.nextSibling, B >= 2 && (d = void 0)), i.activeElementAndParents.includes(y)) break;
+          y = y.nextSibling;
         }
-        return p || null;
+        return d || null;
       }
-      function t(i, o, u) {
-        let v = i.idMap.get(o), p = i.idMap.get(u);
-        if (!p || !v) return !1;
-        for (const k of v)
-          if (p.has(k))
+      function t(i, o, a) {
+        let u = i.idMap.get(o), d = i.idMap.get(a);
+        if (!d || !u) return !1;
+        for (const M of u)
+          if (d.has(M))
             return !0;
         return !1;
       }
-      function s(i, o) {
-        const u = (
+      function n(i, o) {
+        var d, M, B;
+        const a = (
           /** @type {Element} */
           i
-        ), v = (
+        ), u = (
           /** @type {Element} */
           o
         );
-        return u.nodeType === v.nodeType && u.tagName === v.tagName && // If oldElt has an `id` with possible state and it doesn't match newElt.id then avoid morphing.
+        return a.nodeType === u.nodeType && a.tagName === u.tagName && // If oldElt has an `id` with possible state and it doesn't match newElt.id then avoid morphing.
         // We'll still match an anonymous node with an IDed newElt, though, because if it got this far,
         // its not persistent, and new nodes can't have any hidden state.
-        (!u.id || u.id === v.id);
+        // We can't use .id because of form input shadowing, and we can't count on .getAttribute's presence because it could be a document-fragment
+        (!((d = a.getAttribute) != null && d.call(a, "id")) || ((M = a.getAttribute) == null ? void 0 : M.call(a, "id")) === ((B = u.getAttribute) == null ? void 0 : B.call(u, "id")));
       }
       return e;
     })();
-    function d(e, t) {
-      var s;
+    function p(e, t) {
+      var n;
       if (e.idMap.has(t))
-        n(e.pantry, t, null);
+        s(e.pantry, t, null);
       else {
         if (e.callbacks.beforeNodeRemoved(t) === !1) return;
-        (s = t.parentNode) == null || s.removeChild(t), e.callbacks.afterNodeRemoved(t);
+        (n = t.parentNode) == null || n.removeChild(t), e.callbacks.afterNodeRemoved(t);
       }
     }
-    function f(e, t, s) {
+    function h(e, t, n) {
       let i = t;
-      for (; i && i !== s; ) {
+      for (; i && i !== n; ) {
         let o = (
           /** @type {Node} */
           i
         );
-        i = i.nextSibling, d(e, o);
+        i = i.nextSibling, p(e, o);
       }
       return i;
     }
-    function l(e, t, s, i) {
+    function l(e, t, n, i) {
+      var a, u;
       const o = (
         /** @type {Element} - will always be found */
-        i.target.id === t && i.target || i.target.querySelector(`[id="${t}"]`) || i.pantry.querySelector(`[id="${t}"]`)
+        // ctx.target.id unsafe because of form input shadowing
+        // ctx.target could be a document fragment which doesn't have `getAttribute`
+        ((u = (a = i.target).getAttribute) == null ? void 0 : u.call(a, "id")) === t && i.target || i.target.querySelector(`[id="${t}"]`) || i.pantry.querySelector(`[id="${t}"]`)
       );
-      return r(o, i), n(e, o, s), o;
+      return r(o, i), s(e, o, n), o;
     }
     function r(e, t) {
-      const s = e.id;
+      const n = (
+        /** @type {String} */
+        e.getAttribute("id")
+      );
       for (; e = e.parentNode; ) {
         let i = t.idMap.get(e);
-        i && (i.delete(s), i.size || t.idMap.delete(e));
+        i && (i.delete(n), i.size || t.idMap.delete(e));
       }
     }
-    function n(e, t, s) {
+    function s(e, t, n) {
       if (e.moveBefore)
         try {
-          e.moveBefore(t, s);
+          e.moveBefore(t, n);
         } catch (i) {
-          e.insertBefore(t, s);
+          e.insertBefore(t, n);
         }
       else
-        e.insertBefore(t, s);
+        e.insertBefore(t, n);
     }
-    return a;
-  })(), H = /* @__PURE__ */ (function() {
-    function a(r, n, e) {
-      return e.ignoreActive && r === document.activeElement ? null : (e.callbacks.beforeNodeMorphed(r, n) === !1 || (r instanceof HTMLHeadElement && e.head.ignore || (r instanceof HTMLHeadElement && e.head.style !== "morph" ? N(
+    return c;
+  })(), L = /* @__PURE__ */ (function() {
+    function c(r, s, e) {
+      return e.ignoreActive && r === document.activeElement ? null : (e.callbacks.beforeNodeMorphed(r, s) === !1 || (r instanceof HTMLHeadElement && e.head.ignore || (r instanceof HTMLHeadElement && e.head.style !== "morph" ? I(
         r,
         /** @type {HTMLHeadElement} */
-        n,
+        s,
         e
-      ) : (m(r, n, e), l(r, e) || S(e, r, n))), e.callbacks.afterNodeMorphed(r, n)), r);
+      ) : (g(r, s, e), l(r, e) || S(e, r, s))), e.callbacks.afterNodeMorphed(r, s)), r);
     }
-    function m(r, n, e) {
-      let t = n.nodeType;
+    function g(r, s, e) {
+      let t = s.nodeType;
       if (t === 1) {
-        const s = (
+        const n = (
           /** @type {Element} */
           r
         ), i = (
           /** @type {Element} */
-          n
-        ), o = s.attributes, u = i.attributes;
-        for (const v of u)
-          f(v.name, s, "update", e) || s.getAttribute(v.name) !== v.value && s.setAttribute(v.name, v.value);
-        for (let v = o.length - 1; 0 <= v; v--) {
-          const p = o[v];
-          if (p && !i.hasAttribute(p.name)) {
-            if (f(p.name, s, "remove", e))
+          s
+        ), o = n.attributes, a = i.attributes;
+        for (const u of a)
+          h(u.name, n, "update", e) || n.getAttribute(u.name) !== u.value && n.setAttribute(u.name, u.value);
+        for (let u = o.length - 1; 0 <= u; u--) {
+          const d = o[u];
+          if (d && !i.hasAttribute(d.name)) {
+            if (h(d.name, n, "remove", e))
               continue;
-            s.removeAttribute(p.name);
+            n.removeAttribute(d.name);
           }
         }
-        l(s, e) || c(s, i, e);
+        l(n, e) || f(n, i, e);
       }
-      (t === 8 || t === 3) && r.nodeValue !== n.nodeValue && (r.nodeValue = n.nodeValue);
+      (t === 8 || t === 3) && r.nodeValue !== s.nodeValue && (r.nodeValue = s.nodeValue);
     }
-    function c(r, n, e) {
-      if (r instanceof HTMLInputElement && n instanceof HTMLInputElement && n.type !== "file") {
-        let t = n.value, s = r.value;
-        d(r, n, "checked", e), d(r, n, "disabled", e), n.hasAttribute("value") ? s !== t && (f("value", r, "update", e) || (r.setAttribute("value", t), r.value = t)) : f("value", r, "remove", e) || (r.value = "", r.removeAttribute("value"));
-      } else if (r instanceof HTMLOptionElement && n instanceof HTMLOptionElement)
-        d(r, n, "selected", e);
-      else if (r instanceof HTMLTextAreaElement && n instanceof HTMLTextAreaElement) {
-        let t = n.value, s = r.value;
-        if (f("value", r, "update", e))
+    function f(r, s, e) {
+      if (r instanceof HTMLInputElement && s instanceof HTMLInputElement && s.type !== "file") {
+        let t = s.value, n = r.value;
+        p(r, s, "checked", e), p(r, s, "disabled", e), s.hasAttribute("value") ? n !== t && (h("value", r, "update", e) || (r.setAttribute("value", t), r.value = t)) : h("value", r, "remove", e) || (r.value = "", r.removeAttribute("value"));
+      } else if (r instanceof HTMLOptionElement && s instanceof HTMLOptionElement)
+        p(r, s, "selected", e);
+      else if (r instanceof HTMLTextAreaElement && s instanceof HTMLTextAreaElement) {
+        let t = s.value, n = r.value;
+        if (h("value", r, "update", e))
           return;
-        t !== s && (r.value = t), r.firstChild && r.firstChild.nodeValue !== t && (r.firstChild.nodeValue = t);
+        t !== n && (r.value = t), r.firstChild && r.firstChild.nodeValue !== t && (r.firstChild.nodeValue = t);
       }
     }
-    function d(r, n, e, t) {
-      const s = n[e], i = r[e];
-      if (s !== i) {
-        const o = f(
+    function p(r, s, e, t) {
+      const n = s[e], i = r[e];
+      if (n !== i) {
+        const o = h(
           e,
           r,
           "update",
           t
         );
-        o || (r[e] = n[e]), s ? o || r.setAttribute(e, "") : f(e, r, "remove", t) || r.removeAttribute(e);
+        o || (r[e] = s[e]), n ? o || r.setAttribute(e, "") : h(e, r, "remove", t) || r.removeAttribute(e);
       }
     }
-    function f(r, n, e, t) {
-      return r === "value" && t.ignoreActiveValue && n === document.activeElement ? !0 : t.callbacks.beforeAttributeUpdated(r, n, e) === !1;
+    function h(r, s, e, t) {
+      return r === "value" && t.ignoreActiveValue && s === document.activeElement ? !0 : t.callbacks.beforeAttributeUpdated(r, s, e) === !1;
     }
-    function l(r, n) {
-      return !!n.ignoreActiveValue && r === document.activeElement && r !== document.body;
+    function l(r, s) {
+      return !!s.ignoreActiveValue && r === document.activeElement && r !== document.body;
     }
-    return a;
+    return c;
   })();
-  function T(a, m, c, d) {
-    if (a.head.block) {
-      const f = m.querySelector("head"), l = c.querySelector("head");
-      if (f && l) {
-        const r = N(f, l, a);
+  function H(c, g, f, p) {
+    if (c.head.block) {
+      const h = g.querySelector("head"), l = f.querySelector("head");
+      if (h && l) {
+        const r = I(h, l, c);
         return Promise.all(r).then(() => {
-          const n = Object.assign(a, {
+          const s = Object.assign(c, {
             head: {
               block: !1,
               ignore: !0
             }
           });
-          return d(n);
+          return p(s);
         });
       }
     }
-    return d(a);
+    return p(c);
   }
-  function N(a, m, c) {
-    let d = [], f = [], l = [], r = [], n = /* @__PURE__ */ new Map();
-    for (const t of m.children)
-      n.set(t.outerHTML, t);
-    for (const t of a.children) {
-      let s = n.has(t.outerHTML), i = c.head.shouldReAppend(t), o = c.head.shouldPreserve(t);
-      s || o ? i ? f.push(t) : (n.delete(t.outerHTML), l.push(t)) : c.head.style === "append" ? i && (f.push(t), r.push(t)) : c.head.shouldRemove(t) !== !1 && f.push(t);
+  function I(c, g, f) {
+    let p = [], h = [], l = [], r = [], s = /* @__PURE__ */ new Map();
+    for (const t of g.children)
+      s.set(t.outerHTML, t);
+    for (const t of c.children) {
+      let n = s.has(t.outerHTML), i = f.head.shouldReAppend(t), o = f.head.shouldPreserve(t);
+      n || o ? i ? h.push(t) : (s.delete(t.outerHTML), l.push(t)) : f.head.style === "append" ? i && (h.push(t), r.push(t)) : f.head.shouldRemove(t) !== !1 && h.push(t);
     }
-    r.push(...n.values());
+    r.push(...s.values());
     let e = [];
     for (const t of r) {
-      let s = (
+      let n = (
         /** @type {ChildNode} */
         document.createRange().createContextualFragment(t.outerHTML).firstChild
       );
-      if (c.callbacks.beforeNodeAdded(s) !== !1) {
-        if ("href" in s && s.href || "src" in s && s.src) {
-          let i, o = new Promise(function(u) {
-            i = u;
+      if (f.callbacks.beforeNodeAdded(n) !== !1) {
+        if ("href" in n && n.href || "src" in n && n.src) {
+          let i, o = new Promise(function(a) {
+            i = a;
           });
-          s.addEventListener("load", function() {
+          n.addEventListener("load", function() {
             i();
           }), e.push(o);
         }
-        a.appendChild(s), c.callbacks.afterNodeAdded(s), d.push(s);
+        c.appendChild(n), f.callbacks.afterNodeAdded(n), p.push(n);
       }
     }
-    for (const t of f)
-      c.callbacks.beforeNodeRemoved(t) !== !1 && (a.removeChild(t), c.callbacks.afterNodeRemoved(t));
-    return c.head.afterHeadMorphed(a, {
-      added: d,
+    for (const t of h)
+      f.callbacks.beforeNodeRemoved(t) !== !1 && (c.removeChild(t), f.callbacks.afterNodeRemoved(t));
+    return f.head.afterHeadMorphed(c, {
+      added: p,
       kept: l,
-      removed: f
+      removed: h
     }), e;
   }
-  const L = /* @__PURE__ */ (function() {
-    function a(n, e, t) {
-      const { persistentIds: s, idMap: i } = l(n, e), o = m(t), u = o.morphStyle || "outerHTML";
+  const k = /* @__PURE__ */ (function() {
+    function c(e, t, n) {
+      const { persistentIds: i, idMap: o } = r(e, t), a = g(n), u = a.morphStyle || "outerHTML";
       if (!["innerHTML", "outerHTML"].includes(u))
         throw `Do not understand how to morph style ${u}`;
       return {
-        target: n,
-        newContent: e,
-        config: o,
+        target: e,
+        newContent: t,
+        config: a,
         morphStyle: u,
-        ignoreActive: o.ignoreActive,
-        ignoreActiveValue: o.ignoreActiveValue,
-        restoreFocus: o.restoreFocus,
-        idMap: i,
-        persistentIds: s,
-        pantry: c(),
-        callbacks: o.callbacks,
-        head: o.head
+        ignoreActive: a.ignoreActive,
+        ignoreActiveValue: a.ignoreActiveValue,
+        restoreFocus: a.restoreFocus,
+        idMap: o,
+        persistentIds: i,
+        pantry: f(),
+        activeElementAndParents: p(e),
+        callbacks: a.callbacks,
+        head: a.head
       };
     }
-    function m(n) {
-      let e = Object.assign({}, y);
-      return Object.assign(e, n), e.callbacks = Object.assign(
+    function g(e) {
+      let t = Object.assign({}, T);
+      return Object.assign(t, e), t.callbacks = Object.assign(
         {},
-        y.callbacks,
-        n.callbacks
-      ), e.head = Object.assign({}, y.head, n.head), e;
+        T.callbacks,
+        e.callbacks
+      ), t.head = Object.assign({}, T.head, e.head), t;
     }
-    function c() {
-      const n = document.createElement("div");
-      return n.hidden = !0, document.body.insertAdjacentElement("afterend", n), n;
+    function f() {
+      const e = document.createElement("div");
+      return e.hidden = !0, document.body.insertAdjacentElement("afterend", e), e;
     }
-    function d(n) {
-      let e = Array.from(n.querySelectorAll("[id]"));
-      return n.id && e.push(n), e;
+    function p(e) {
+      let t = [], n = document.activeElement;
+      if ((n == null ? void 0 : n.tagName) !== "BODY" && e.contains(n))
+        for (; n && (t.push(n), n !== e); )
+          n = n.parentElement;
+      return t;
     }
-    function f(n, e, t, s) {
-      for (const i of s)
-        if (e.has(i.id)) {
-          let o = i;
-          for (; o; ) {
-            let u = n.get(o);
-            if (u == null && (u = /* @__PURE__ */ new Set(), n.set(o, u)), u.add(i.id), o === t) break;
-            o = o.parentElement;
+    function h(e) {
+      var n;
+      let t = Array.from(e.querySelectorAll("[id]"));
+      return (n = e.getAttribute) != null && n.call(e, "id") && t.push(e), t;
+    }
+    function l(e, t, n, i) {
+      for (const o of i) {
+        const a = (
+          /** @type {String} */
+          o.getAttribute("id")
+        );
+        if (t.has(a)) {
+          let u = o;
+          for (; u; ) {
+            let d = e.get(u);
+            if (d == null && (d = /* @__PURE__ */ new Set(), e.set(u, d)), d.add(a), u === n) break;
+            u = u.parentElement;
           }
         }
+      }
     }
-    function l(n, e) {
-      const t = d(n), s = d(e), i = r(t, s);
-      let o = /* @__PURE__ */ new Map();
-      f(o, i, n, t);
-      const u = e.__idiomorphRoot || e;
-      return f(o, i, u, s), { persistentIds: i, idMap: o };
+    function r(e, t) {
+      const n = h(e), i = h(t), o = s(n, i);
+      let a = /* @__PURE__ */ new Map();
+      l(a, o, e, n);
+      const u = t.__idiomorphRoot || t;
+      return l(a, o, u, i), { persistentIds: o, idMap: a };
     }
-    function r(n, e) {
-      let t = /* @__PURE__ */ new Set(), s = /* @__PURE__ */ new Map();
-      for (const { id: o, tagName: u } of n)
-        s.has(o) ? t.add(o) : s.set(o, u);
-      let i = /* @__PURE__ */ new Set();
-      for (const { id: o, tagName: u } of e)
-        i.has(o) ? t.add(o) : s.get(o) === u && i.add(o);
-      for (const o of t)
-        i.delete(o);
-      return i;
+    function s(e, t) {
+      let n = /* @__PURE__ */ new Set(), i = /* @__PURE__ */ new Map();
+      for (const { id: a, tagName: u } of e)
+        i.has(a) ? n.add(a) : i.set(a, u);
+      let o = /* @__PURE__ */ new Set();
+      for (const { id: a, tagName: u } of t)
+        o.has(a) ? n.add(a) : i.get(a) === u && o.add(a);
+      for (const a of n)
+        o.delete(a);
+      return o;
     }
-    return a;
-  })(), { normalizeElement: E, normalizeParent: I } = /* @__PURE__ */ (function() {
-    const a = /* @__PURE__ */ new WeakSet();
-    function m(l) {
+    return c;
+  })(), { normalizeElement: E, normalizeParent: N } = /* @__PURE__ */ (function() {
+    const c = /* @__PURE__ */ new WeakSet();
+    function g(l) {
       return l instanceof Document ? l.documentElement : l;
     }
-    function c(l) {
+    function f(l) {
       if (l == null)
         return document.createElement("div");
       if (typeof l == "string")
-        return c(f(l));
-      if (a.has(
+        return f(h(l));
+      if (c.has(
         /** @type {Element} */
         l
       ))
@@ -397,7 +425,7 @@ var B = (function() {
         if (l.parentNode)
           return (
             /** @type {any} */
-            new d(l)
+            new p(l)
           );
         {
           const r = document.createElement("div");
@@ -405,12 +433,12 @@ var B = (function() {
         }
       } else {
         const r = document.createElement("div");
-        for (const n of [...l])
-          r.append(n);
+        for (const s of [...l])
+          r.append(s);
         return r;
       }
     }
-    class d {
+    class p {
       /** @param {Node} node */
       constructor(r) {
         this.originalNode = r, this.realParentNode = /** @type {Element} */
@@ -419,9 +447,9 @@ var B = (function() {
       /** @returns {Node[]} */
       get childNodes() {
         const r = [];
-        let n = this.previousSibling ? this.previousSibling.nextSibling : this.realParentNode.firstChild;
-        for (; n && n != this.nextSibling; )
-          r.push(n), n = n.nextSibling;
+        let s = this.previousSibling ? this.previousSibling.nextSibling : this.realParentNode.firstChild;
+        for (; s && s != this.nextSibling; )
+          r.push(s), s = s.nextSibling;
         return r;
       }
       /**
@@ -430,14 +458,14 @@ var B = (function() {
        */
       querySelectorAll(r) {
         return this.childNodes.reduce(
-          (n, e) => {
+          (s, e) => {
             if (e instanceof Element) {
-              e.matches(r) && n.push(e);
+              e.matches(r) && s.push(e);
               const t = e.querySelectorAll(r);
-              for (let s = 0; s < t.length; s++)
-                n.push(t[s]);
+              for (let n = 0; n < t.length; n++)
+                s.push(t[n]);
             }
-            return n;
+            return s;
           },
           /** @type {Element[]} */
           []
@@ -448,16 +476,16 @@ var B = (function() {
        * @param {Node} referenceNode
        * @returns {Node}
        */
-      insertBefore(r, n) {
-        return this.realParentNode.insertBefore(r, n);
+      insertBefore(r, s) {
+        return this.realParentNode.insertBefore(r, s);
       }
       /**
        * @param {Node} node
        * @param {Node} referenceNode
        * @returns {Node}
        */
-      moveBefore(r, n) {
-        return this.realParentNode.moveBefore(r, n);
+      moveBefore(r, s) {
+        return this.realParentNode.moveBefore(r, s);
       }
       /**
        * for later use with populateIdMapWithTree to halt upwards iteration
@@ -467,18 +495,18 @@ var B = (function() {
         return this.originalNode;
       }
     }
-    function f(l) {
-      let r = new DOMParser(), n = l.replace(
+    function h(l) {
+      let r = new DOMParser(), s = l.replace(
         /<svg(\s[^>]*>|>)([\s\S]*?)<\/svg>/gim,
         ""
       );
-      if (n.match(/<\/html>/) || n.match(/<\/head>/) || n.match(/<\/body>/)) {
+      if (s.match(/<\/html>/) || s.match(/<\/head>/) || s.match(/<\/body>/)) {
         let e = r.parseFromString(l, "text/html");
-        if (n.match(/<\/html>/))
-          return a.add(e), e;
+        if (s.match(/<\/html>/))
+          return c.add(e), e;
         {
           let t = e.firstChild;
-          return t && a.add(t), t;
+          return t && c.add(t), t;
         }
       } else {
         let t = (
@@ -488,63 +516,63 @@ var B = (function() {
             "text/html"
           ).body.querySelector("template").content
         );
-        return a.add(t), t;
+        return c.add(t), t;
       }
     }
-    return { normalizeElement: m, normalizeParent: c };
+    return { normalizeElement: g, normalizeParent: f };
   })();
   return {
-    morph: g,
-    defaults: y
+    morph: b,
+    defaults: T
   };
 })();
-const O = ({ target: h }) => {
+const q = ({ target: m }) => {
   V();
-  const y = document.head.cloneNode(!0), g = h.innerHTML;
+  const T = document.head.cloneNode(!0), b = m.innerHTML;
   return {
-    renderJS(M, b) {
-      if (!b && !M) {
+    renderJS(A, v) {
+      if (!v && !A) {
         const S = 'script[name="outlet-script"]';
-        return h.innerHTML = g, document.head.querySelector(S).remove(), Promise.resolve(h);
+        return m.innerHTML = b, document.head.querySelector(S).remove(), Promise.resolve(m);
       }
-      return h.innerHTML = `<${M}></${M}>`, new Promise((S, H) => {
-        const T = document.createElement("script");
-        T.setAttribute("name", "outlet-script"), T.src = b, T.onload = () => S(h), T.onerror = H, document.head.appendChild(T);
+      return m.innerHTML = `<${A}></${A}>`, new Promise((S, L) => {
+        const H = document.createElement("script");
+        H.setAttribute("name", "outlet-script"), H.src = v, H.onload = () => S(m), H.onerror = L, document.head.appendChild(H);
       }).catch((S) => {
         throw "TypeError: Failed to fetch";
       });
     },
-    render(M) {
-      return M ? fetch(M).then((b) => b.text()).then((b) => {
-        const S = [], H = new URL(M), N = new DOMParser().parseFromString(b, "text/html"), L = N.documentElement.querySelector("body"), E = L.querySelectorAll("script, link, style"), I = N.documentElement.querySelector("head");
-        return E.forEach((a) => {
-          I.appendChild(a);
-        }), B.morph(document.head, I, {
+    render(A) {
+      return A ? fetch(A).then((v) => v.text()).then((v) => {
+        const S = [], L = new URL(A), I = new DOMParser().parseFromString(v, "text/html"), k = I.documentElement.querySelector("body"), E = k.querySelectorAll("script, link, style"), N = I.documentElement.querySelector("head");
+        return E.forEach((c) => {
+          N.appendChild(c);
+        }), R.morph(document.head, N, {
           callbacks: {
-            beforeNodeAdded: q(S, H)
+            beforeNodeAdded: O(S, L)
           }
-        }), new Promise((a) => {
-          h.innerHTML = L == null ? void 0 : L.innerHTML, Promise.allSettled(S).then(() => a(h));
+        }), new Promise((c) => {
+          m.innerHTML = k == null ? void 0 : k.innerHTML, Promise.allSettled(S).then(() => c(m));
         });
-      }).catch((b) => {
-        throw b;
-      }) : (B.morph(document.head, y), h.innerHTML = g, Promise.resolve(h));
+      }).catch((v) => {
+        throw v;
+      }) : (R.morph(document.head, T), m.innerHTML = b, Promise.resolve(m));
     }
   };
 }, V = () => {
-  document.head.querySelectorAll("script, link, style").forEach((h) => h.setAttribute("im-preserve", "true"));
-}, q = (h, y) => (g) => {
-  if (g.src && g.getAttribute("src").startsWith("/")) {
-    const { pathname: M, search: b } = new URL(g.src);
-    g.src = y.origin + M + b;
-  } else if (g.href && g.getAttribute("href").startsWith("/")) {
-    const { pathname: M, search: b } = new URL(g.href);
-    g.href = y.origin + M + b;
+  document.head.querySelectorAll("script, link, style").forEach((m) => m.setAttribute("im-preserve", "true"));
+}, O = (m, T) => (b) => {
+  if (b.src && b.getAttribute("src").startsWith("/")) {
+    const { pathname: A, search: v } = new URL(b.src);
+    b.src = T.origin + A + v;
+  } else if (b.href && b.getAttribute("href").startsWith("/")) {
+    const { pathname: A, search: v } = new URL(b.href);
+    b.href = T.origin + A + v;
   }
-  return g.src && g.localName == "script" && h.push(new Promise((M, b) => {
-    g.addEventListener("load", M), g.addEventListener("error", b);
-  })), h;
+  return b.src && b.localName == "script" && m.push(new Promise((A, v) => {
+    b.addEventListener("load", A), b.addEventListener("error", v);
+  })), m;
 };
 export {
-  O as Outlet
+  q as Outlet
 };
