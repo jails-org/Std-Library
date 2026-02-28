@@ -1,47 +1,37 @@
-function S(l, d) {
-  let s = [], r = !1;
-  const n = /* @__PURE__ */ new Set(), c = h(l), u = () => c, f = (t) => {
-    if (t.call)
-      return n.add(t), () => {
-        n.delete(t);
-      };
-    {
-      const a = (o, { action: e, payload: i }) => {
-        e in t && t[e].call(null, o, { action: e, payload: i });
-      };
-      return n.add(a), () => {
-        n.delete(a);
-      };
-    }
-  }, p = (t, a = {}) => (s.push({ action: t, payload: a }), new Promise((o) => {
-    r || y(o);
-  })), y = (t) => {
-    for (r = !0; s.length; ) {
-      const a = s.slice();
-      s = [];
-      for (const { action: o, payload: e } of a) {
-        if (!(o in d)) {
-          console.log(`[Oni] Error -> No action [ ${o} ] found.`);
-          continue;
-        }
-        const i = d[o].call(null, c, e, {
-          getState: u,
-          subscribe: f,
-          dispatch: p
+function j(n, f) {
+  let o = [], a = !1;
+  const s = /* @__PURE__ */ new Set(), t = O(n), l = () => t, p = (e) => (s.add(e), () => s.delete(e)), d = (e, i = {}) => (o.push({ action: e, payload: i }), new Promise((c) => {
+    a || y(c);
+  })), y = (e) => {
+    for (a = !0; o.length; ) {
+      const i = o.slice();
+      o = [];
+      for (const { action: c, payload: b } of i) {
+        const u = f[c];
+        if (!u) continue;
+        const r = u(t, b, {
+          getState: l,
+          subscribe: p,
+          dispatch: d
         });
-        Object.assign(c, i), n.forEach((g) => g(c, { action: o, payload: e }));
+        r && typeof r == "object" && Object.assign(t, r), s.forEach(
+          (h) => h(t, { action: c, payload: b })
+        );
       }
     }
-    r = !1, t(c);
-  };
+    a = !1, e(t);
+  }, S = () => s.clear(), g = Object.fromEntries(
+    Object.keys(f).map((e) => [e, e])
+  );
   return {
-    getState: u,
-    subscribe: f,
-    dispatch: p,
-    destroy: () => n.clear()
+    getState: l,
+    dispatch: d,
+    subscribe: p,
+    destroy: S,
+    Actions: g
   };
 }
-const h = (l) => JSON.parse(JSON.stringify(l));
+const O = (n) => JSON.parse(JSON.stringify(n));
 export {
-  S as Store
+  j as Store
 };
