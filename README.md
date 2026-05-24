@@ -1,6 +1,7 @@
 
+
 <div align="center">
-    <h1>jails.stdlib</h1>
+    <img width="315" height="195" alt="jails-stdlib-logo" src="https://github.com/user-attachments/assets/22e39b5f-7166-4296-bf1c-64115ea3c07e" />
     <h4>The Jails Standard Library</h4>
 </div>
 
@@ -11,11 +12,7 @@
 ```
 npm install jails.stdlib
 ```
-or
 
-```
-yarn add jails.stdlib
-```
 
 <br />
 
