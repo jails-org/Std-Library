@@ -1,8 +1,7 @@
 
-
 <div align="center">
-    <img width="315" height="195" alt="jails-stdlib-logo" src="https://github.com/user-attachments/assets/22e39b5f-7166-4296-bf1c-64115ea3c07e" />
-    <h4>The Jails Standard Library</h4>
+    <img width="315" alt="Jails Standard Library" src="https://github.com/user-attachments/assets/7ddd9ecb-28af-4832-a6fc-c4b2cff40253" />
+    <h1>Jails Standard Library</h1>
 </div>
 
 <br />
