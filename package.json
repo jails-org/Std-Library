@@ -7,6 +7,9 @@
     "type": "git",
     "url": "git+ssh://git@github.com/jails-org/std.git"
   },
+  "exports": {
+    "./*": "./src/*/index.js"
+  },
   "author": "Javiani <eduardo.ottaviani@gmail.com>",
   "license": "MIT",
   "scripts": {
