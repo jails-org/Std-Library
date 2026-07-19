@@ -47,7 +47,7 @@ export default function formValidation({
 
 	const getInitialValues = () => {
 		const fields_ = {}
-		fields.forEach((name:string) => (fields_[name] = ''))
+		fields.forEach((name:string) => (fields_[name] = form[name].dataset.initialValue || ''))
 		return fields_
 	}
 
