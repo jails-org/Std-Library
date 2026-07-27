@@ -35,6 +35,14 @@ Fired when form is **invalid**, provides a map with errors fields.
 on('form-validation:error', ({ errors }) => {})
 ```
 
+##### `form-validation:valid` 
+Fired when form is **valid**, provides a map with data fields.
+
+```ts
+on('form-validation:valid', ({ data }) => {})
+```
+
+
 ---
 
 

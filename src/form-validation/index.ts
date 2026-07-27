@@ -112,6 +112,10 @@ export default function formValidation({
 					s.form.isValid = true
 				}
 			})
+			.then(() => {
+				const data = serialize(form)
+				emit(`${NAME}:valid`, { ...data })
+			})
 		}
 	}
 
