@@ -29,11 +29,11 @@ function W({
   dependencies: N,
   trigger: O
 }) {
-  var E;
-  const u = y(N, []), c = (E = r.querySelector("input,select,textarea")) == null ? void 0 : E.form;
-  let d = I(c);
+  var V;
+  const u = y(N, []), f = (V = r.querySelector("input,select,textarea")) == null ? void 0 : V.form;
+  let m = I(f);
   t((s) => {
-    a("input", "input, textarea, select", j), a("input", J, K), a("input", p, b("input")), a("change", p, b("change")), a("blur", p, b("blur")), a("focus", "input, textarea, select", _), a("blur", "input, textarea, select", $), c.addEventListener("reset", T), c.addEventListener("submit", q), z();
+    a("input", "input, textarea, select", j), a("input", J, K), a("input", p, b("input")), a("change", p, b("change")), a("blur", p, b("blur")), a("focus", "input, textarea, select", _), a("blur", "input, textarea, select", $), f.addEventListener("reset", T), f.addEventListener("submit", q), z();
   }), r.setValues = (s) => {
     e.set((o) => o.form.values = v(v({}, o.form.values), s));
   };
@@ -42,11 +42,11 @@ function W({
       throw new Error(
         "<form-validation> - No entities provided in dependencies"
       );
-    const s = V();
+    const s = E();
     e.set((o) => o.form.values = s);
-  }, V = () => {
+  }, E = () => {
     const s = {};
-    return d.forEach((o) => s[o] = c[o].dataset.initialValue || ""), s;
+    return m.forEach((o) => s[o] = ""), s;
   }, _ = (s) => {
     const o = s.target.name;
     e.set((n) => {
@@ -58,25 +58,25 @@ function W({
       n.form.focused[o] = !1;
     });
   }, b = (s) => (o) => {
-    const n = o.target, f = n.name, l = F(n, c), k = n.dataset.validation.split(/\s/), m = [], x = e.get();
+    const n = o.target, c = n.name, l = F(n, f), k = n.dataset.validation.split(/\s/), d = [], x = e.get();
     k.forEach((i) => {
       if (i in u) {
         const D = u[i];
-        if (!D.validate(l, n, c)) {
-          const B = D.message(l, n, c);
-          m.push(B);
+        if (!D.validate(l, n, f)) {
+          const B = D.message(l, n, f);
+          d.push(B);
         }
       }
-    }), m.length ? s === "input" ? (d.add(n.name), e.set((i) => {
-      i.form.isValid = !1, x.form.errors[f] && m[0] != x.form.errors[f] && (i.form.errors[f] = m[0]);
-    })) : (s === "blur" || s === "change") && (d.add(n.name), e.set((i) => {
-      i.form.errors[f] = m[0], i.form.isValid = !1;
-    })) : (d.delete(n.name), e.set((i) => {
-      delete i.form.errors[f], d.size || (i.form.isValid = !0);
+    }), d.length ? s === "input" ? (m.add(n.name), e.set((i) => {
+      i.form.isValid = !1, x.form.errors[c] && d[0] != x.form.errors[c] && (i.form.errors[c] = d[0]);
+    })) : (s === "blur" || s === "change") && (m.add(n.name), e.set((i) => {
+      i.form.errors[c] = d[0], i.form.isValid = !1;
+    })) : (m.delete(n.name), e.set((i) => {
+      delete i.form.errors[c], m.size || (i.form.isValid = !0);
     }));
   }, j = (s) => {
-    const { name: o } = s.target, n = F(s.target, c);
-    e.set((f) => f.form.values[o] = n);
+    const { name: o } = s.target, n = F(s.target, f);
+    e.set((c) => c.form.values[o] = n);
   }, q = (s) => {
     s.preventDefault(), O("blur", p);
     const n = e.get().form.errors;
@@ -96,9 +96,9 @@ function W({
       }
     }), e.set((l) => l.form.values[s.target.name] = o || "");
   }, T = () => {
-    d = I(c), e.set({
+    m = I(f), e.set({
       form: w(v({}, P.form), {
-        values: V()
+        values: E()
       })
     });
   };
